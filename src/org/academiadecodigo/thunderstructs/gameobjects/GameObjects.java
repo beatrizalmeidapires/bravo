@@ -29,6 +29,11 @@ public class GameObjects implements Physics, KeyboardHandler {
     @Override
     public void gravity() {
 
+            if(!(position.getPosY() >=  Game.GAME_HEIGHT - 80)) {
+                person.translate(0, + 2);
+                position.setPosY(position.getPosY() + 2);
+            }
+            pause(7);
     }
 
     public void moveUp() {
@@ -82,5 +87,13 @@ public class GameObjects implements Physics, KeyboardHandler {
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
+    }
+
+    public static void pause(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            System.err.format("IOException: %s%n", e);
+        }
     }
 }
