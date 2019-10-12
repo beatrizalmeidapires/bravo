@@ -15,11 +15,12 @@ public class Game {
     private Person person1;
     private Position targetPosition = new Position(400, 0);
     private boolean win;
+    public static int margin = 10;
 
 
     public void drawBackground() {
 
-        int margin = 10;
+
 
         Rectangle background = new Rectangle(margin, margin, 1500, 800);
         background.setColor(Color.DARK_GRAY);
@@ -28,7 +29,7 @@ public class Game {
 
     public void init() {
 
-        position = new Position(200, 200);
+        position = new Position(1400, 200);
         position1 = new Position(400, 400);
         person = new Person(position);
         person1 = new Person(position1);
@@ -70,8 +71,11 @@ public class Game {
         while (!win) {
 
             System.out.println(person.getPosX());
-
-            if (person.getPosX() >= 1500) {
+            System.out.println(person.getPosY());
+            if (person.getPosX() >= 1440) {
+                Text winMessage = new Text(500, 500, "You win bro");
+                winMessage.draw();
+                winMessage.grow(300, 300);
 
                 System.out.println("Agora é que é!!");
                 win = true;
@@ -80,8 +84,6 @@ public class Game {
 
 
             //System.out.println("Olá team!");
-
-
 
 
         }

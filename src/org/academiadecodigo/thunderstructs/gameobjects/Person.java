@@ -4,6 +4,7 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.thunderstructs.Game;
 
 public class Person implements KeyboardHandler {
 
@@ -40,23 +41,33 @@ public class Person implements KeyboardHandler {
     }
 
     public void moveUp() {
-        person.translate(0, -20);
-        position.setPosY(position.getPosY() - 20);
+
+        if(!(position.getPosY() <=  Game.margin)) {
+            person.translate(0, -10);
+            position.setPosY(position.getPosY() - 10);
+        }
     }
 
     public void moveDown() {
-        person.translate(0, 20);
-        position.setPosY(position.getPosY() + 20);
+
+        if(!(position.getPosY() >= 800 - 40)) {
+            person.translate(0, 10);
+            position.setPosY(position.getPosY() + 10);
+        }
     }
 
     public void moveLeft() {
-        person.translate(-20, 0);
-        position.setPosX(position.getPosX() - 20);
+        if(!(position.getPosX() <= Game.margin)) {
+            person.translate(-10, 0);
+            position.setPosX(position.getPosX() - 10);
+        }
     }
 
     public void moveRight() {
-        person.translate(20, 0);
-        position.setPosX(position.getPosX() + 20);
+        if(!(position.getPosX() >= 1500 - 60 )) {
+            person.translate(10, 0);
+            position.setPosX(position.getPosX() + 10);
+        }
     }
 
 
