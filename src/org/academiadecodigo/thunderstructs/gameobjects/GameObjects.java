@@ -2,6 +2,7 @@ package org.academiadecodigo.thunderstructs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.thunderstructs.Game;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
@@ -9,16 +10,15 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 public class GameObjects implements Physics, KeyboardHandler {
 
     private Position position;
-    private Rectangle person;
+    private Picture person;
 
-    public GameObjects(Position position, Rectangle person){
+    public GameObjects(Position position, Picture person){
         this.position = position;
         this.person = person;
     }
 
     public void drawPerson() {
-        person.setColor(Color.YELLOW);
-        person.fill();
+        person.draw();
     }
 
     @Override
@@ -33,7 +33,7 @@ public class GameObjects implements Physics, KeyboardHandler {
 
     public void moveUp() {
 
-        if(!(position.getPosY() <=  Game.margin)) {
+        if(!(position.getPosY() <=  Game.MARGIN)) {
             person.translate(0, -10);
             position.setPosY(position.getPosY() - 10);
         }
@@ -41,21 +41,21 @@ public class GameObjects implements Physics, KeyboardHandler {
 
     public void moveDown() {
 
-        if(!(position.getPosY() >= 800 - 40)) {
+        if(!(position.getPosY() >= Game.GAME_HEIGHT - 40)) {
             person.translate(0, 10);
             position.setPosY(position.getPosY() + 10);
         }
     }
 
     public void moveLeft() {
-        if(!(position.getPosX() <= Game.margin)) {
+        if(!(position.getPosX() <= Game.MARGIN)) {
             person.translate(-10, 0);
             position.setPosX(position.getPosX() - 10);
         }
     }
 
     public void moveRight() {
-        if(!(position.getPosX() >= 1500 - 60 )) {
+        if(!(position.getPosX() >= Game.GAME_WIDTH - 60 )) {
             person.translate(10, 0);
             position.setPosX(position.getPosX() + 10);
         }

@@ -15,7 +15,7 @@ public class Game {
     private Person person1;
 
     public static final int GAME_WIDTH = 1500;
-    public static final int GAME_HEIGHT = 800;
+    public static final int GAME_HEIGHT = 700;
     public static final int MARGIN = 10;
     private Position targetPosition;
     private boolean win;
@@ -34,8 +34,8 @@ public class Game {
     public void init() {
         position = new Position(1400, 200);
         position1 = new Position(400, 400);
-        person = new Person(position);
-        person1 = new Person(position1);
+        person = new Person(position, "character1.png");
+        person1 = new Person(position1, "character2.png");
         person1.drawPerson();
         person.drawPerson();
     }
