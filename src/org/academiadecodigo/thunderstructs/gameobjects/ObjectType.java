@@ -1,18 +1,20 @@
 package org.academiadecodigo.thunderstructs.gameobjects;
 
 public enum ObjectType {
-    PERSON(50,50),
-    MINIDARTHVADER(50,50),
-    BLOCK(50,50);
+    PLAYER(50, 90),
+    DARTHVADER(50, 50),
+    REGULAR_BLOCK(50, 50),
+    DESTROYABLE_BLOCK(50,50),
+    SNIPPET_BLOCK(50,50);
 
 
     private int height;
     private int width;
 
 
-    ObjectType(int height , int width){
-        this.height = height;
+    ObjectType(int width, int height) {
         this.width = width;
+        this.height = height;
 
     }
 

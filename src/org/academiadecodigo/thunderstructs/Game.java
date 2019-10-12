@@ -4,15 +4,19 @@ import org.academiadecodigo.simplegraphics.graphics.*;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
-import org.academiadecodigo.thunderstructs.gameobjects.Person;
+import org.academiadecodigo.thunderstructs.gameobjects.ObjectType;
+import org.academiadecodigo.thunderstructs.gameobjects.Player;
 import org.academiadecodigo.thunderstructs.gameobjects.Position;
+import org.academiadecodigo.thunderstructs.gameobjects.RegularBlock;
 
 public class Game {
 
     private Position position;
     private Position position1;
-    private Person person;
-    private Person person1;
+    private Position blockPosition;
+    private Player player;
+    private Player player1;
+    private RegularBlock block;
 
     public static final int GAME_WIDTH = 1200;
     public static final int GAME_HEIGHT = 600;
@@ -20,7 +24,7 @@ public class Game {
     private Position targetPosition;
     private boolean win;
 
-    public Game(){
+    public Game() {
         this.targetPosition = new Position(1100, 0);
         this.win = false;
     }
@@ -34,10 +38,14 @@ public class Game {
     public void init() {
         position = new Position(900, 200);
         position1 = new Position(400, 200);
-        person = new Person(position, "character1.png");
-        person1 = new Person(position1, "character2.png");
-        person1.drawPerson();
-        person.drawPerson();
+        player = new Player(position, "character1.png");
+        player1 = new Player(position1, "character2.png");
+        player1.drawObject();
+        player.drawObject();
+
+        blockPosition = new Position(600, GAME_HEIGHT - ObjectType.REGULAR_BLOCK.getHeigth());
+        block = new RegularBlock (blockPosition,"character2.png");
+        block.drawObject();
     }
 
 
@@ -47,9 +55,7 @@ public class Game {
         startKeyboard();
         while (!win) {
 
-            System.out.println(person.getPosX());
-            System.out.println(person.getPosY());
-            if (person.getPosX() >= targetPosition.getPosX()) {
+            if (player.getPosX() >= targetPosition.getPosX()) {
                 Text winMessage = new Text(500, 500, "You win bro");
                 winMessage.draw();
                 winMessage.grow(300, 300);
@@ -58,19 +64,21 @@ public class Game {
                 win = true;
 
             }
-
+            player.jump();
+            player.gravity();
         }
 
     }
 
-    public void startKeyboard(){
+    public void startKeyboard() {
 
-        Keyboard keyboard = new Keyboard(person);
+        Keyboard keyboard = new Keyboard(player);
 
         KeyboardEvent left = new KeyboardEvent();
         KeyboardEvent right = new KeyboardEvent();
         KeyboardEvent up = new KeyboardEvent();
         KeyboardEvent down = new KeyboardEvent();
+        KeyboardEvent jump = new KeyboardEvent();
 
         left.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         left.setKey(KeyboardEvent.KEY_LEFT);
@@ -84,9 +92,14 @@ public class Game {
         down.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         down.setKey(KeyboardEvent.KEY_DOWN);
 
+        jump.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        jump.setKey(KeyboardEvent.KEY_SPACE);
+
+
         keyboard.addEventListener(left);
         keyboard.addEventListener(right);
         keyboard.addEventListener(up);
         keyboard.addEventListener(down);
+        keyboard.addEventListener(jump);
     }
 }

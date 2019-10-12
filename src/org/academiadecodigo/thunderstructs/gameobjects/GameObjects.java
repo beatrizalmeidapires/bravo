@@ -1,24 +1,25 @@
 package org.academiadecodigo.thunderstructs.gameobjects;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.thunderstructs.Game;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.thunderstructs.UtilityMethods;
 
 public class GameObjects implements Physics, KeyboardHandler {
 
     private Position position;
-    private Picture person;
+    private Picture objectImage;
+    private boolean gravity;
 
-    public GameObjects(Position position, Picture person){
+    public GameObjects(Position position, Picture objectImage) {
         this.position = position;
-        this.person = person;
+        this.objectImage = objectImage;
+        this.gravity = true;
     }
 
-    public void drawPerson() {
-        person.draw();
+    public void drawObject() {
+        objectImage.draw();
     }
 
     @Override
@@ -29,39 +30,44 @@ public class GameObjects implements Physics, KeyboardHandler {
     @Override
     public void gravity() {
 
-            if(!(position.getPosY() >=  Game.GAME_HEIGHT - 80)) {
-                person.translate(0, + 2);
-                position.setPosY(position.getPosY() + 2);
-            }
-            pause(7);
+        if (!gravity) {
+            return;
+        }
+
+        if (!(position.getPosY() >= Game.GAME_HEIGHT - 80)) {
+            objectImage.translate(0, +2);
+            position.setPosY(position.getPosY() + 2);
+        }
+
+        UtilityMethods.pause(7);
     }
 
     public void moveUp() {
 
-        if(!(position.getPosY() <=  Game.MARGIN)) {
-            person.translate(0, -10);
+        if (!(position.getPosY() <= Game.MARGIN)) {
+            objectImage.translate(0, -10);
             position.setPosY(position.getPosY() - 10);
         }
     }
 
     public void moveDown() {
 
-        if(!(position.getPosY() >= Game.GAME_HEIGHT - 40)) {
-            person.translate(0, 10);
+        if (!(position.getPosY() >= Game.GAME_HEIGHT - 40)) {
+            objectImage.translate(0, 10);
             position.setPosY(position.getPosY() + 10);
         }
     }
 
     public void moveLeft() {
-        if(!(position.getPosX() <= Game.MARGIN)) {
-            person.translate(-10, 0);
+        if (!(position.getPosX() <= Game.MARGIN)) {
+            objectImage.translate(-10, 0);
             position.setPosX(position.getPosX() - 10);
         }
     }
 
     public void moveRight() {
-        if(!(position.getPosX() >= Game.GAME_WIDTH - 60 )) {
-            person.translate(10, 0);
+        if (!(position.getPosX() >= Game.GAME_WIDTH - 60)) {
+            objectImage.translate(10, 0);
             position.setPosX(position.getPosX() + 10);
         }
     }
@@ -89,11 +95,12 @@ public class GameObjects implements Physics, KeyboardHandler {
 
     }
 
-    public static void pause(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            System.err.format("IOException: %s%n", e);
-        }
+    public Picture getObjectImage() {
+        return this.objectImage;
     }
+
+    public void setGravity(boolean gravityStatus) {
+        this.gravity = gravityStatus;
+    }
+
 }
