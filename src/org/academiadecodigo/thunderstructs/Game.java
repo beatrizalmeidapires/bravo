@@ -13,26 +13,57 @@ public class Game {
     private Position position1;
     private Person person;
     private Person person1;
-    private Position targetPosition = new Position(400, 0);
-    private boolean win;
-    public static int margin = 10;
 
+    public static final int GAME_WIDTH = 1500;
+    public static final int GAME_HEIGHT = 800;
+    public static final int MARGIN = 10;
+    private Position targetPosition;
+    private boolean win;
+
+    public Game(){
+        this.targetPosition = new Position(400, 0);
+        this.win = false;
+    }
 
     public void drawBackground() {
-
-
-
-        Rectangle background = new Rectangle(margin, margin, 1500, 800);
+        Rectangle background = new Rectangle(MARGIN, MARGIN, GAME_WIDTH, GAME_HEIGHT);
         background.setColor(Color.DARK_GRAY);
         background.fill();
     }
 
     public void init() {
-
         position = new Position(1400, 200);
         position1 = new Position(400, 400);
         person = new Person(position);
         person1 = new Person(position1);
+        person1.drawPerson();
+        person.drawPerson();
+    }
+
+
+    public void start() {
+
+        init();
+        startKeyboard();
+        while (!win) {
+
+            System.out.println(person.getPosX());
+            System.out.println(person.getPosY());
+            if (person.getPosX() >= 1440) {
+                Text winMessage = new Text(500, 500, "You win bro");
+                winMessage.draw();
+                winMessage.grow(300, 300);
+
+                System.out.println("Agora é que é!!");
+                win = true;
+
+            }
+
+        }
+
+    }
+
+    public void startKeyboard(){
 
         Keyboard keyboard = new Keyboard(person);
 
@@ -57,37 +88,6 @@ public class Game {
         keyboard.addEventListener(right);
         keyboard.addEventListener(up);
         keyboard.addEventListener(down);
-
-        person1.drawPerson();
-        person.drawPerson();
-    }
-
-
-    public void start() {
-
-        init();
-
-        //while (person.getPosX() <= targetPosition.getPosX()) {
-        while (!win) {
-
-            System.out.println(person.getPosX());
-            System.out.println(person.getPosY());
-            if (person.getPosX() >= 1440) {
-                Text winMessage = new Text(500, 500, "You win bro");
-                winMessage.draw();
-                winMessage.grow(300, 300);
-
-                System.out.println("Agora é que é!!");
-                win = true;
-
-            }
-
-
-            //System.out.println("Olá team!");
-
-
-        }
-
     }
 
 }
