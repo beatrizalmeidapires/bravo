@@ -89,5 +89,4 @@ public class Game {
         keyboard.addEventListener(up);
         keyboard.addEventListener(down);
     }
-
 }
