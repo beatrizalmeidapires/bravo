@@ -14,14 +14,14 @@ public class Game {
     private Person person;
     private Person person1;
 
-    public static final int GAME_WIDTH = 1500;
-    public static final int GAME_HEIGHT = 700;
+    public static final int GAME_WIDTH = 1200;
+    public static final int GAME_HEIGHT = 600;
     public static final int MARGIN = 10;
     private Position targetPosition;
     private boolean win;
 
     public Game(){
-        this.targetPosition = new Position(400, 0);
+        this.targetPosition = new Position(1100, 0);
         this.win = false;
     }
 
@@ -32,8 +32,8 @@ public class Game {
     }
 
     public void init() {
-        position = new Position(1400, 200);
-        position1 = new Position(400, 400);
+        position = new Position(900, 200);
+        position1 = new Position(400, 200);
         person = new Person(position, "character1.png");
         person1 = new Person(position1, "character2.png");
         person1.drawPerson();
@@ -49,7 +49,7 @@ public class Game {
 
             System.out.println(person.getPosX());
             System.out.println(person.getPosY());
-            if (person.getPosX() >= 1440) {
+            if (person.getPosX() >= targetPosition.getPosX()) {
                 Text winMessage = new Text(500, 500, "You win bro");
                 winMessage.draw();
                 winMessage.grow(300, 300);
