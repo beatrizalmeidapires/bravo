@@ -16,10 +16,15 @@ public class Player extends GameObjects {
     private int currentJumpSpeed;
     private int jumpCounter;
 
-    private int currentMovementSpeed;
-    private int movementCounter;
-    private int stoppingCounter;
+    private int currentRightSpeed;
+    private int rightMovementCounter;
+    private int rightStoppingCounter;
 
+    private int currentLeftSpeed;
+    private int leftMovementCounter;
+    private int leftStoppingCounter;
+
+    private String direction;
     private int health;
     private Position position;
     private Picture characterImage;
@@ -32,8 +37,8 @@ public class Player extends GameObjects {
         this.characterImage = getObjectImage();
         this.speed = 3;
         this.currentJumpSpeed = 3;
-        this.currentMovementSpeed = 1;
-        this.movementCounter = 0;
+        this.currentRightSpeed = 1;
+        this.rightMovementCounter = 0;
 
     }
 
@@ -41,53 +46,98 @@ public class Player extends GameObjects {
 
         if (right) {
 
-            stoppingCounter = 0; //if > 0 (movementCounter--)
+            rightStoppingCounter = 0; //if > 0 (rightMovementCounter--)
 
-            if (movementCounter == 8) {
-                currentMovementSpeed++;
+            if (rightMovementCounter == 8) {
+                currentRightSpeed++;
             }
 
-            if (movementCounter == 12) {
-                currentMovementSpeed++;
-                movementCounter++;
+            if (rightMovementCounter == 12) {
+                currentRightSpeed++;
             }
 
-            movementCounter++;
-            super.getObjectImage().translate(currentMovementSpeed, 0);
-            position.setPosX(position.getPosX() + currentMovementSpeed);
+            if (currentRightSpeed > speed) {
+                currentRightSpeed = speed;
+            }
+
+            rightMovementCounter++;
+            super.getObjectImage().translate(currentRightSpeed, 0);
+            position.setPosX(position.getPosX() + currentRightSpeed);
         }
 
         if (!right) {
 
-            movementCounter = 0; //if > 0 (movementCounter--)
+            rightMovementCounter = 0; //if > 0 (rightMovementCounter--)
 
-            if (stoppingCounter == 8) {
-                currentMovementSpeed--;
+            if (rightStoppingCounter == 8) {
+                currentRightSpeed--;
             }
 
-            if (stoppingCounter == 12) {
-                currentMovementSpeed--;
+            if (rightStoppingCounter == 12) {
+                currentRightSpeed--;
             }
 
-            if (stoppingCounter == 16) {
-                currentMovementSpeed--;
+            if (rightStoppingCounter == 16) {
+                currentRightSpeed--;
             }
 
-            if (currentMovementSpeed < 0) {
-                currentMovementSpeed = 0;
+            if (currentRightSpeed < 0) {
+                currentRightSpeed = 0;
             }
 
-            stoppingCounter++;
-            super.getObjectImage().translate(currentMovementSpeed, 0);
-            position.setPosX(position.getPosX() + currentMovementSpeed);
+            rightStoppingCounter++;
+            super.getObjectImage().translate(currentRightSpeed, 0);
+            position.setPosX(position.getPosX() + currentRightSpeed);
 
         }
 
 
 
         if (left) {
-            super.getObjectImage().translate(-speed, 0);
-            position.setPosX(position.getPosX() - speed);
+
+            leftStoppingCounter = 0; //if > 0 (rightMovementCounter--)
+
+            if (leftMovementCounter == 8) {
+                currentLeftSpeed++;
+            }
+
+            if (leftMovementCounter == 12) {
+                currentLeftSpeed++;
+            }
+
+            if (currentLeftSpeed > speed) {
+                currentLeftSpeed = speed;
+            }
+
+            leftMovementCounter++;
+            super.getObjectImage().translate(-currentLeftSpeed, 0);
+            position.setPosX(position.getPosX() - currentLeftSpeed);
+        }
+
+        if (!left) {
+
+            leftMovementCounter = 0; //if > 0 (rightMovementCounter--)
+
+            if (leftStoppingCounter == 8) {
+                currentLeftSpeed--;
+            }
+
+            if (leftStoppingCounter == 12) {
+                currentLeftSpeed--;
+            }
+
+            if (leftStoppingCounter == 16) {
+                currentLeftSpeed--;
+            }
+
+            if (currentLeftSpeed < 0) {
+                currentLeftSpeed = 0;
+            }
+
+            leftStoppingCounter++;
+            super.getObjectImage().translate(-currentLeftSpeed, 0);
+            position.setPosX(position.getPosX() - currentLeftSpeed);
+
         }
 
         if (jumping) {
