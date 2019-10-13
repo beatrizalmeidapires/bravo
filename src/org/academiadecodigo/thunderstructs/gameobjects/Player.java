@@ -11,10 +11,14 @@ public class Player extends GameObjects {
     private boolean left;
     private boolean jumping;
     private boolean falling;
+    private int speed;
 
     private int currentJumpSpeed;
-    private int speed;
     private int jumpCounter;
+
+    private int currentMovementSpeed;
+    private int movementCounter;
+    private int stoppingCounter;
 
     private int health;
     private Position position;
@@ -28,14 +32,58 @@ public class Player extends GameObjects {
         this.characterImage = getObjectImage();
         this.speed = 3;
         this.currentJumpSpeed = 3;
+        this.currentMovementSpeed = 1;
+        this.movementCounter = 0;
 
     }
 
     public void tick () {
+
         if (right) {
-            super.getObjectImage().translate(speed, 0);
-            position.setPosX(position.getPosX() + speed);
+
+            stoppingCounter = 0; //if > 0 (movementCounter--)
+
+            if (movementCounter == 8) {
+                currentMovementSpeed++;
+            }
+
+            if (movementCounter == 12) {
+                currentMovementSpeed++;
+                movementCounter++;
+            }
+
+            movementCounter++;
+            super.getObjectImage().translate(currentMovementSpeed, 0);
+            position.setPosX(position.getPosX() + currentMovementSpeed);
         }
+
+        if (!right) {
+
+            movementCounter = 0; //if > 0 (movementCounter--)
+
+            if (stoppingCounter == 8) {
+                currentMovementSpeed--;
+            }
+
+            if (stoppingCounter == 12) {
+                currentMovementSpeed--;
+            }
+
+            if (stoppingCounter == 16) {
+                currentMovementSpeed--;
+            }
+
+            if (currentMovementSpeed < 0) {
+                currentMovementSpeed = 0;
+            }
+
+            stoppingCounter++;
+            super.getObjectImage().translate(currentMovementSpeed, 0);
+            position.setPosX(position.getPosX() + currentMovementSpeed);
+
+        }
+
+
 
         if (left) {
             super.getObjectImage().translate(-speed, 0);
@@ -140,11 +188,6 @@ public class Player extends GameObjects {
 
     public void setFalling (boolean setStatus) {
         this.falling = setStatus;
-    }
-
-
-    public void setJump() {
-        jumping = true;
     }
 
     public boolean getRight () {
