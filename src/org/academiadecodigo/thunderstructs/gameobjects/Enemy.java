@@ -12,6 +12,7 @@ public class Enemy extends GameObjects {
 
 
     public Enemy(Position position, String picture) {
+
         super(position, new Picture(position.getPosX(), position.getPosY(), picture), ObjectType.DARTHVADER);
         this.position = position;
         this.enemyImage = getObjectImage();
