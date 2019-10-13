@@ -27,25 +27,33 @@ public class Enemy extends GameObjects {
 
         while (!isDead) {
 
-            int random = (int) (Math.random() * 2 + 1);
+            int random = (int) (Math.floor(Math.random() + 1.5));
 
             //Right
-            if (random == 1 && position.getPosX() < Game.GAME_WIDTH - (ObjectType.DARTHVADER.getWidth()) + Game.MARGIN) {
-                //while (!collision())
-                position.setPosX(position.getPosX() + speed);
-                enemyImage.translate(+speed, 0);
+            if (random == 1 && position.getPosX() < Game.GAME_WIDTH - (ObjectType.DARTHVADER.getWidth() + Game.MARGIN)) {
+                while (position.getPosX() != Game.GAME_WIDTH - (ObjectType.DARTHVADER.getWidth() - Game.MARGIN)) {
+                    //while (!collision())
 
+                    UtilityMethods.pause(100);
+                    position.setPosX(position.getPosX() + speed);
+                    enemyImage.translate(+speed, 0);
+
+
+                }
             }
             //Left
             if (random == 2 && position.getPosX() > Game.MARGIN) {
-                //while (!collision())
-                position.setPosX(position.getPosX() - speed);
-                enemyImage.translate(-speed, 0);
+                while (position.getPosX() != Game.MARGIN) {
+                    //while (!collision())
+                    UtilityMethods.pause(100);
+                    position.setPosX(position.getPosX() - speed);
+                    enemyImage.translate(-speed, 0);
+
+
+                }
             }
-            UtilityMethods.pause(40);
+            UtilityMethods.pause(100);
 
         }
-
-
     }
 }
