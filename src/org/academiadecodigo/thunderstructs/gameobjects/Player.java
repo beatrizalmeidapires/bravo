@@ -2,6 +2,7 @@ package org.academiadecodigo.thunderstructs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
+import org.academiadecodigo.thunderstructs.Game;
 import org.academiadecodigo.thunderstructs.UtilityMethods;
 
 
@@ -26,16 +27,14 @@ public class Player extends GameObjects {
     }
 
     public void tick () {
-        System.out.println("Teste");
-        System.out.println("Right: " + getRight());
         if (right) {
-            super.getObjectImage().translate(10, 0);
-            position.setPosX(position.getPosX() + 10);
+            super.getObjectImage().translate(3, 0);
+            position.setPosX(position.getPosX() + 3);
         }
 
         if (left) {
-            super.getObjectImage().translate(-10, 0);
-            position.setPosX(position.getPosX() - 10);
+            super.getObjectImage().translate(-3, 0);
+            position.setPosX(position.getPosX() - 3);
         }
 /*
         if (jumping) {
@@ -71,6 +70,9 @@ public class Player extends GameObjects {
     }
 */
 
+//TODO: Change KEY_SPACE with KEY_UP; Erase commented code; Improve jump smoothness (using speed...).
+
+
     @Override
     public void keyReleased (KeyboardEvent keyboardEvent) {
         switch (keyboardEvent.getKey()) {
@@ -99,6 +101,9 @@ public class Player extends GameObjects {
                 moveUp();
                 break;
             case KeyboardEvent.KEY_SPACE:
+                if (position.getPosY() < Game.GAME_HEIGHT - ObjectType.PLAYER.getHeigth()) { //TODO: Change 2nd value once Collisions are working properly
+                    break;
+                }
                 setJump();
                 break;
         }
@@ -108,8 +113,8 @@ public class Player extends GameObjects {
 
         if (jumping) {
             setGravity(false);
-            position.setPosY(getPosY() - 2);
-            characterImage.translate(0, -2);
+            position.setPosY(getPosY() - 3);
+            characterImage.translate(0, -3);
             UtilityMethods.pause(7);
             jumpCounter++;
 
