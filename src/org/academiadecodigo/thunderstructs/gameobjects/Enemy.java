@@ -9,7 +9,6 @@ public class Enemy extends GameObjects {
     private Position position;
     private Picture enemyImage;
     private boolean isDead;
-    private int speed = 10;
 
 
     public Enemy(Position position, String picture) {
@@ -30,30 +29,22 @@ public class Enemy extends GameObjects {
             int random = (int) (Math.floor(Math.random() + 1.5));
 
             //Right
-            if (random == 1 && position.getPosX() < Game.GAME_WIDTH - (ObjectType.DARTHVADER.getWidth() + Game.MARGIN)) {
-                while (position.getPosX() != Game.GAME_WIDTH - (ObjectType.DARTHVADER.getWidth() - Game.MARGIN)) {
-                    //while (!collision())
-
-                    UtilityMethods.pause(100);
-                    position.setPosX(position.getPosX() + speed);
-                    enemyImage.translate(+speed, 0);
-
-
+            if (random == 1) {
+                while (!(position.getPosX() >= Game.GAME_WIDTH - (ObjectType.DARTHVADER.getWidth() + Game.MARGIN))) {
+                    UtilityMethods.pause(70);
+                    moveRight();
                 }
+
+
             }
             //Left
-            if (random == 2 && position.getPosX() > Game.MARGIN) {
-                while (position.getPosX() != Game.MARGIN) {
-                    //while (!collision())
-                    UtilityMethods.pause(100);
-                    position.setPosX(position.getPosX() - speed);
-                    enemyImage.translate(-speed, 0);
-
-
+            if (random == 2) {
+                while (!(position.getPosX() <= Game.MARGIN)) {
+                    UtilityMethods.pause(70);
+                    moveLeft();
                 }
-            }
-            UtilityMethods.pause(100);
 
+            }
         }
     }
 }
