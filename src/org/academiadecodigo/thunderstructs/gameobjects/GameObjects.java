@@ -12,10 +12,17 @@ public class GameObjects implements Physics, KeyboardHandler {
     private Picture objectImage;
     private boolean gravity;
 
-    public GameObjects(Position position, Picture objectImage) {
+    private int width;
+    private int height;
+
+
+
+    public GameObjects(Position position, Picture objectImage, ObjectType objectType) {
         this.position = position;
         this.objectImage = objectImage;
         this.gravity = true;
+        this.width = objectType.getWidth();
+        this.height = objectType.getHeigth();
     }
 
     public void drawObject() {
@@ -102,5 +109,18 @@ public class GameObjects implements Physics, KeyboardHandler {
     public void setGravity(boolean gravityStatus) {
         this.gravity = gravityStatus;
     }
+
+    public Position getPosition () {
+        return this.position;
+    }
+
+    public int getWidth () {
+        return this.width;
+    }
+
+    public int getHeight () {
+        return this.height;
+    }
+
 
 }

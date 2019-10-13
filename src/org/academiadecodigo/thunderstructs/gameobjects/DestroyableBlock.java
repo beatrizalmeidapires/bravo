@@ -9,7 +9,7 @@ public class DestroyableBlock extends Block {
     private static int hits;
 
     public DestroyableBlock(Position position, String picture) {
-        super(position, picture);
+        super(position, picture, ObjectType.DESTROYABLE_BLOCK);
         this.destroyed = false;
     }
 

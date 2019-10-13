@@ -59,6 +59,8 @@ public class Game {
         startKeyboard();
         while (!win) {
 
+            System.out.println(player.getPosX());
+
             if (player.getPosX() >= targetPosition.getPosX()) {
                 Text winMessage = new Text(500, 500, "You win bro");
                 winMessage.draw();
@@ -68,9 +70,8 @@ public class Game {
                 win = true;
 
             }
-            player.jump();
             player.gravity();
-            //System.out.println(player.getPosY() + 134);
+            player.tick();
         }
 
     }
@@ -80,16 +81,24 @@ public class Game {
         Keyboard keyboard = new Keyboard(player);
 
         KeyboardEvent left = new KeyboardEvent();
+        KeyboardEvent leftReleased = new KeyboardEvent();
+
         KeyboardEvent right = new KeyboardEvent();
+        KeyboardEvent rightReleased = new KeyboardEvent();
+
         KeyboardEvent up = new KeyboardEvent();
         KeyboardEvent down = new KeyboardEvent();
         KeyboardEvent jump = new KeyboardEvent();
 
         left.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         left.setKey(KeyboardEvent.KEY_LEFT);
+        leftReleased.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        leftReleased.setKey(KeyboardEvent.KEY_LEFT);
 
         right.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         right.setKey(KeyboardEvent.KEY_RIGHT);
+        rightReleased.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        rightReleased.setKey(KeyboardEvent.KEY_RIGHT);
 
         up.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         up.setKey(KeyboardEvent.KEY_UP);
@@ -100,9 +109,13 @@ public class Game {
         jump.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         jump.setKey(KeyboardEvent.KEY_SPACE);
 
-
         keyboard.addEventListener(left);
+        keyboard.addEventListener(leftReleased);
+
         keyboard.addEventListener(right);
+        keyboard.addEventListener(rightReleased);
+
+
         keyboard.addEventListener(up);
         keyboard.addEventListener(down);
         keyboard.addEventListener(jump);

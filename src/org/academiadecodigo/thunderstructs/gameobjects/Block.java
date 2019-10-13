@@ -7,8 +7,8 @@ public abstract class Block extends GameObjects {
     private Position position;
 
 
-    public Block(Position position, String picture) {
-        super(position, new Picture(position.getPosX(), position.getPosY(), picture));
+    public Block(Position position, String picture, ObjectType objectType) {
+        super(position, new Picture(position.getPosX(), position.getPosY(), picture), objectType);
         this.position = position;
     }
 
