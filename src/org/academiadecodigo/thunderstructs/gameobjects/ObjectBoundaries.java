@@ -2,11 +2,6 @@ package org.academiadecodigo.thunderstructs.gameobjects;
 
 public class ObjectBoundaries {
 
-    private GameObjects gb1;
-    private GameObjects gb2;
-    private boolean collisionOnTop;
-    private boolean collisionOnBottom;
-
     // Top, bottom, left and right positions of X and Y
     // coordinates occupied by that side represented by initial and final coordinate
     // all coordinates represents a pixel location
@@ -29,11 +24,6 @@ public class ObjectBoundaries {
     private int object2RightX;
     private int object2InitY;
     private int object2FinalY;
-
-    public ObjectBoundaries(){
-        collisionOnTop = false;
-        collisionOnBottom = false;
-    }
 
     private void getTopBottomBounds(GameObjects gb1, GameObjects gb2){
         object1TopY = gb1.getPosition().getPosY();
@@ -62,26 +52,24 @@ public class ObjectBoundaries {
     public boolean checkCollisionOnTop(GameObjects gb1, GameObjects gb2){
         getSideBounds(gb1, gb2);
         getTopBottomBounds(gb1, gb2);
-        return object1TopY == object2BottomY && (object1FinalX >= object2InitX && !(object1FinalX > (object2FinalX + gb1.getWidth())));
+        return ((object1TopY -1 == object2BottomY) || ((object1TopY) == object2BottomY) || ((object1TopY + 1) == object2BottomY)) && (object1FinalX >= object2InitX && !(object1FinalX > (object2FinalX + gb1.getWidth())));
     }
 
     public boolean checkCollisionOnBottom(GameObjects gb1, GameObjects gb2){
         getSideBounds(gb1, gb2);
         getTopBottomBounds(gb1, gb2);
-        return object1BottomY == object2TopY && (object1FinalX >= object2InitX && !(object1FinalX > (object2FinalX + gb1.getWidth())));
+        return ((object1BottomY - 1 == object2TopY) || (object1BottomY == object2TopY) || (object1BottomY + 1 == object2TopY)) && (object1FinalX >= object2InitX && !(object1FinalX > (object2FinalX + gb1.getWidth())));
     }
 
     public boolean checkCollisionOnLeft(GameObjects gb1, GameObjects gb2){
         getSideBounds(gb1, gb2);
         getTopBottomBounds(gb1, gb2);
-        return object1LeftX == object2RightX && (object1FinalY >= object2InitY && !(object1FinalY > (object2FinalY + gb1.getHeight())));
+        return ((object1LeftX - 1 == object2RightX) || (object1LeftX == object2RightX) || (object1LeftX + 1 == object2RightX)) && (object1FinalY >= object2InitY && !(object1FinalY > (object2FinalY + gb1.getHeight())));
     }
 
     public boolean checkCollisionOnRight(GameObjects gb1, GameObjects gb2){
         getSideBounds(gb1, gb2);
-        return object1RightX == object2LeftX && (object1FinalY >= object2InitY && !(object1FinalY > (object2FinalY + gb1.getHeight())));
+        return ((object1RightX - 1 == object2LeftX) || (object1RightX == object2LeftX) || (object1RightX + 1 == object2LeftX)) && (object1FinalY >= object2InitY && !(object1FinalY > (object2FinalY + gb1.getHeight())));
     }
-
-
 
 }

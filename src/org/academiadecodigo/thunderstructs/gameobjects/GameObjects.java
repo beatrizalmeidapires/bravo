@@ -12,6 +12,12 @@ public class GameObjects implements Physics, KeyboardHandler {
     private Picture objectImage;
     private boolean gravity;
 
+    private boolean collisionOnTop;
+    private boolean collisionOnBottom;
+    private boolean collisionOnLeft;
+    private boolean collisionOnRight;
+
+
     private int width;
     private int height;
 
@@ -41,7 +47,7 @@ public class GameObjects implements Physics, KeyboardHandler {
             return;
         }
 
-        if (!(position.getPosY() >= Game.GAME_HEIGHT - 80)) {
+        if (!(position.getPosY() >= Game.GAME_HEIGHT - 80) && !isCollisionOnBottom()) {
             objectImage.translate(0, +2);
             position.setPosY(position.getPosY() + 2);
         }
@@ -122,5 +128,36 @@ public class GameObjects implements Physics, KeyboardHandler {
         return this.height;
     }
 
+    public void setCollisionOnTop(boolean collisionOnTop) {
+        this.collisionOnTop = collisionOnTop;
+    }
 
+    public void setCollisionOnBottom(boolean collisionOnBottom) {
+        this.collisionOnBottom = collisionOnBottom;
+    }
+
+    public void setCollisionOnLeft(boolean collisionOnLeft) {
+        this.collisionOnLeft = collisionOnLeft;
+    }
+
+    public void setCollisionOnRight(boolean collisionOnRight) {
+        this.collisionOnRight = collisionOnRight;
+    }
+
+    public boolean isCollisionOnTop() {
+        return collisionOnTop;
+    }
+
+    public boolean isCollisionOnBottom() {
+        return collisionOnBottom;
+    }
+
+    public boolean isCollisionOnLeft() {
+        return collisionOnLeft;
+    }
+
+    public boolean isCollisionOnRight() {
+        return collisionOnRight;
+    }
 }
+

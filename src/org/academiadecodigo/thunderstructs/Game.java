@@ -5,19 +5,19 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.academiadecodigo.thunderstructs.gameobjects.ObjectType;
-import org.academiadecodigo.thunderstructs.gameobjects.Player;
-import org.academiadecodigo.thunderstructs.gameobjects.Position;
-import org.academiadecodigo.thunderstructs.gameobjects.RegularBlock;
+import org.academiadecodigo.thunderstructs.gameobjects.*;
 
 public class Game {
 
     private Position position;
     private Position position1;
     private Position blockPosition;
+    private Position blockPosition2;
     private Player player;
     private Player player1;
     private RegularBlock block;
+    private RegularBlock block2;
+    private ObjectBoundaries bounds;
 
     public static final int GAME_WIDTH = 1200;
     public static final int GAME_HEIGHT = 624;
@@ -31,9 +31,6 @@ public class Game {
     }
 
     public void drawBackground() {
-        //Rectangle background = new Rectangle(MARGIN, MARGIN, GAME_WIDTH, GAME_HEIGHT);
-        //background.setColor(Color.DARK_GRAY);
-        //background.fill();
 
         Picture backgroundPicture = new Picture(MARGIN,MARGIN, "beautiful.png");
         backgroundPicture.draw();
@@ -47,9 +44,17 @@ public class Game {
         player1.drawObject();
         player.drawObject();
 
-        blockPosition = new Position(600, GAME_HEIGHT - ObjectType.REGULAR_BLOCK.getHeigth() + MARGIN);
+        blockPosition = new Position(600, GAME_HEIGHT - 70);
         block = new RegularBlock (blockPosition,"brickblock.png");
         block.drawObject();
+
+
+        //blockPosition2 = new Position(550, GAME_HEIGHT - ObjectType.REGULAR_BLOCK.getHeigth());
+        //block2 = new RegularBlock (blockPosition2,"brickblock.png");
+        //block2.drawObject();
+
+
+        this.bounds = new ObjectBoundaries();
     }
 
 
@@ -72,6 +77,17 @@ public class Game {
             }
             player.gravity();
             player.tick();
+
+            player.setCollisionOnTop(bounds.checkCollisionOnTop(player, block));
+            player.setCollisionOnBottom(bounds.checkCollisionOnBottom(player,block));
+            player.setCollisionOnLeft(bounds.checkCollisionOnLeft(player, block));
+            player.setCollisionOnRight(bounds.checkCollisionOnRight(player, block));
+
+            //player.setCollisionOnTop(bounds.checkCollisionOnTop(player, block2));
+            //player.setCollisionOnBottom(bounds.checkCollisionOnBottom(player,block2));
+            //player.setCollisionOnLeft(bounds.checkCollisionOnLeft(player, block2));
+            //player.setCollisionOnRight(bounds.checkCollisionOnRight(player, block2));
+
         }
 
     }

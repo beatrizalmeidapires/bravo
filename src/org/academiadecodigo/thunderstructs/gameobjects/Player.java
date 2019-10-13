@@ -7,6 +7,7 @@ import org.academiadecodigo.thunderstructs.UtilityMethods;
 
 public class Player extends GameObjects {
 
+
     private boolean right;
     private boolean left;
     private boolean jumping;
@@ -24,7 +25,7 @@ public class Player extends GameObjects {
     private int leftMovementCounter;
     private int leftStoppingCounter;
 
-    private String direction;
+    private String direction; //TODO: implement shooting
     private int health;
     private Position position;
     private Picture characterImage;
@@ -42,125 +43,162 @@ public class Player extends GameObjects {
 
     }
 
+    @Override
+    public void moveRight () {
+
+        rightStoppingCounter = 0; //if > 0 (rightMovementCounter--)
+
+        if (rightMovementCounter == 8) {
+            currentRightSpeed++;
+        }
+
+        if (rightMovementCounter == 12) {
+            currentRightSpeed++;
+        }
+
+        if (currentRightSpeed > speed) {
+            currentRightSpeed = speed;
+        }
+
+        rightMovementCounter++;
+        super.getObjectImage().translate(currentRightSpeed, 0);
+        position.setPosX(position.getPosX() + currentRightSpeed);
+    }
+
+    public void stopRight () {
+
+        rightMovementCounter = 0; //if > 0 (rightMovementCounter--)
+
+        if (rightStoppingCounter == 8) {
+            currentRightSpeed--;
+        }
+
+        if (rightStoppingCounter == 12) {
+            currentRightSpeed--;
+        }
+
+        if (rightStoppingCounter == 16) {
+            currentRightSpeed--;
+        }
+
+        if (currentRightSpeed < 0) {
+            currentRightSpeed = 0;
+        }
+
+        rightStoppingCounter++;
+        super.getObjectImage().translate(currentRightSpeed, 0);
+        position.setPosX(position.getPosX() + currentRightSpeed);
+    }
+
+    @Override
+    public void moveLeft () {
+
+        leftStoppingCounter = 0; //if > 0 (rightMovementCounter--)
+
+        if (leftMovementCounter == 8) {
+            currentLeftSpeed++;
+        }
+
+        if (leftMovementCounter == 12) {
+            currentLeftSpeed++;
+        }
+
+        if (currentLeftSpeed > speed) {
+            currentLeftSpeed = speed;
+        }
+
+        leftMovementCounter++;
+        super.getObjectImage().translate(-currentLeftSpeed, 0);
+        position.setPosX(position.getPosX() - currentLeftSpeed);
+    }
+
+    public void stopLeft() {
+        leftMovementCounter = 0; //if > 0 (rightMovementCounter--)
+
+        if (leftStoppingCounter == 8) {
+            currentLeftSpeed--;
+        }
+
+        if (leftStoppingCounter == 12) {
+            currentLeftSpeed--;
+        }
+
+        if (leftStoppingCounter == 16) {
+            currentLeftSpeed--;
+        }
+
+        if (currentLeftSpeed < 0) {
+            currentLeftSpeed = 0;
+        }
+
+        leftStoppingCounter++;
+        super.getObjectImage().translate(-currentLeftSpeed, 0);
+        position.setPosX(position.getPosX() - currentLeftSpeed);
+    }
+
+    public void jump () {
+
+        setGravity(false);
+        smoothJump();
+
+        position.setPosY(getPosY() - currentJumpSpeed);
+        characterImage.translate(0,- currentJumpSpeed);
+        UtilityMethods.pause(7);
+        jumpCounter++;
+
+        if (jumpCounter >= 50) {
+            this.jumping = false;
+            setGravity(true);
+            jumpCounter = 0;
+            currentJumpSpeed = speed;
+        }
+    }
+
+
     public void tick () {
 
-        if (right) {
-
-            rightStoppingCounter = 0; //if > 0 (rightMovementCounter--)
-
-            if (rightMovementCounter == 8) {
-                currentRightSpeed++;
-            }
-
-            if (rightMovementCounter == 12) {
-                currentRightSpeed++;
-            }
-
-            if (currentRightSpeed > speed) {
-                currentRightSpeed = speed;
-            }
-
-            rightMovementCounter++;
-            super.getObjectImage().translate(currentRightSpeed, 0);
-            position.setPosX(position.getPosX() + currentRightSpeed);
+        if (right && !isCollisionOnRight()) {
+            moveRight();
         }
 
         if (!right) {
 
-            rightMovementCounter = 0; //if > 0 (rightMovementCounter--)
-
-            if (rightStoppingCounter == 8) {
-                currentRightSpeed--;
-            }
-
-            if (rightStoppingCounter == 12) {
-                currentRightSpeed--;
-            }
-
-            if (rightStoppingCounter == 16) {
-                currentRightSpeed--;
-            }
-
-            if (currentRightSpeed < 0) {
+            if (isCollisionOnRight()) {
                 currentRightSpeed = 0;
             }
 
-            rightStoppingCounter++;
-            super.getObjectImage().translate(currentRightSpeed, 0);
-            position.setPosX(position.getPosX() + currentRightSpeed);
-
+            stopRight();
         }
 
-
-
-        if (left) {
-
-            leftStoppingCounter = 0; //if > 0 (rightMovementCounter--)
-
-            if (leftMovementCounter == 8) {
-                currentLeftSpeed++;
-            }
-
-            if (leftMovementCounter == 12) {
-                currentLeftSpeed++;
-            }
-
-            if (currentLeftSpeed > speed) {
-                currentLeftSpeed = speed;
-            }
-
-            leftMovementCounter++;
-            super.getObjectImage().translate(-currentLeftSpeed, 0);
-            position.setPosX(position.getPosX() - currentLeftSpeed);
+        if (left && !isCollisionOnLeft()) {
+            moveLeft();
         }
 
         if (!left) {
 
-            leftMovementCounter = 0; //if > 0 (rightMovementCounter--)
-
-            if (leftStoppingCounter == 8) {
-                currentLeftSpeed--;
-            }
-
-            if (leftStoppingCounter == 12) {
-                currentLeftSpeed--;
-            }
-
-            if (leftStoppingCounter == 16) {
-                currentLeftSpeed--;
-            }
-
-            if (currentLeftSpeed < 0) {
+            if (isCollisionOnLeft()) {
                 currentLeftSpeed = 0;
             }
-
-            leftStoppingCounter++;
-            super.getObjectImage().translate(-currentLeftSpeed, 0);
-            position.setPosX(position.getPosX() - currentLeftSpeed);
-
+            
+            stopLeft();
         }
 
         if (jumping) {
-            setGravity(false);
-            smoothJump();
 
-            position.setPosY(getPosY() - currentJumpSpeed);
-            characterImage.translate(0,- currentJumpSpeed);
-            UtilityMethods.pause(7);
-            jumpCounter++;
-
-            if (jumpCounter >= 50) {
-                this.jumping = false;
-                setGravity(true);
-                jumpCounter = 0;
-                currentJumpSpeed = speed;
+            if (!isCollisionOnTop()) {
+                jump();
+                return;
             }
+
+            setJumping(false);
+            setGravity(true);
         }
 
+        /*
         if (falling) {
-
+            gravity();
         }
-
+        */
     }
 
     public void smoothJump () {
@@ -207,8 +245,10 @@ public class Player extends GameObjects {
                 if (position.getPosY() < Game.GAME_HEIGHT - ObjectType.PLAYER.getHeigth()) { //TODO: Change 2nd value once Collisions are working properly
                     break; //Send condition to "jumping" to allow continuous jumping while pressing up.
                 }
+
                 setJumping(true);
                 break;
+
             case KeyboardEvent.KEY_SPACE:
                 break;
         }
@@ -235,6 +275,7 @@ public class Player extends GameObjects {
     public void setJumping (boolean setStatus) {
         this.jumping = setStatus;
     }
+
 
     public void setFalling (boolean setStatus) {
         this.falling = setStatus;
