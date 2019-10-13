@@ -5,7 +5,6 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.thunderstructs.Game;
 import org.academiadecodigo.thunderstructs.UtilityMethods;
 
-
 public class Player extends GameObjects {
 
     private boolean right;
@@ -13,66 +12,74 @@ public class Player extends GameObjects {
     private boolean jumping;
     private boolean falling;
 
+    private int currentJumpSpeed;
+    private int speed;
+    private int jumpCounter;
+
+    private int health;
     private Position position;
     private Picture characterImage;
-    private int jumpCounter;
 
 
     public Player(Position position, String picture) {
 
-        super(position, new Picture(position.getPosX(), position.getPosY(), picture));
+        super(position, new Picture(position.getPosX(), position.getPosY(), picture), ObjectType.PLAYER);
         this.position = position;
         this.characterImage = getObjectImage();
+        this.speed = 3;
+        this.currentJumpSpeed = 3;
 
     }
 
     public void tick () {
         if (right) {
-            super.getObjectImage().translate(3, 0);
-            position.setPosX(position.getPosX() + 3);
+            super.getObjectImage().translate(speed, 0);
+            position.setPosX(position.getPosX() + speed);
         }
 
         if (left) {
-            super.getObjectImage().translate(-3, 0);
-            position.setPosX(position.getPosX() - 3);
+            super.getObjectImage().translate(-speed, 0);
+            position.setPosX(position.getPosX() - speed);
         }
-/*
+
         if (jumping) {
             setGravity(false);
-            position.setPosY(getPosY() - 2);
-            characterImage.translate(0,-2);
+            smoothJump();
+
+            position.setPosY(getPosY() - currentJumpSpeed);
+            characterImage.translate(0,- currentJumpSpeed);
             UtilityMethods.pause(7);
             jumpCounter++;
 
-            if (jumpCounter >= 45) {
+            if (jumpCounter >= 50) {
                 this.jumping = false;
                 setGravity(true);
                 jumpCounter = 0;
+                currentJumpSpeed = speed;
             }
         }
 
         if (falling) {
 
         }
-*/
+
     }
-/*
-    @Override
-    public void keyReleased(KeyboardEvent keyboardEvent) {
-        switch (keyboardEvent.getKey()) {
-            case KeyboardEvent.KEY_LEFT:
-                setLeft(false);
-                break;
-            case KeyboardEvent.KEY_RIGHT:
-                setRight(false);
-                break;
+
+    public void smoothJump () {
+        if (jumpCounter == 30) {
+            currentJumpSpeed--;
+        }
+
+        if (jumpCounter == 36) {
+            currentJumpSpeed--;
+        }
+
+        if (jumpCounter == 44) {
+            currentJumpSpeed--;
         }
     }
-*/
 
 //TODO: Change KEY_SPACE with KEY_UP; Erase commented code; Improve jump smoothness (using speed...).
-
-
     @Override
     public void keyReleased (KeyboardEvent keyboardEvent) {
         switch (keyboardEvent.getKey()) {
@@ -98,34 +105,18 @@ public class Player extends GameObjects {
                 moveDown();
                 break;
             case KeyboardEvent.KEY_UP:
-                moveUp();
+
+                if (position.getPosY() < Game.GAME_HEIGHT - ObjectType.PLAYER.getHeigth()) { //TODO: Change 2nd value once Collisions are working properly
+                    break; //Send condition to "jumping" to allow continuous jumping while pressing up.
+                }
+                setJumping(true);
                 break;
             case KeyboardEvent.KEY_SPACE:
-                if (position.getPosY() < Game.GAME_HEIGHT - ObjectType.PLAYER.getHeigth()) { //TODO: Change 2nd value once Collisions are working properly
-                    break;
-                }
-                setJump();
                 break;
         }
     }
 
-    public void jump() {
 
-        if (jumping) {
-            setGravity(false);
-            position.setPosY(getPosY() - 3);
-            characterImage.translate(0, -3);
-            UtilityMethods.pause(7);
-            jumpCounter++;
-
-        }
-
-        if (jumpCounter >= 45) {
-            jumping = false;
-            setGravity(true);
-            jumpCounter = 0;
-        }
-    }
 
     public int getPosX() {
         return this.position.getPosX();
