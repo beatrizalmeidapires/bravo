@@ -1,6 +1,5 @@
 package org.academiadecodigo.thunderstructs;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.academiadecodigo.simplegraphics.graphics.*;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;

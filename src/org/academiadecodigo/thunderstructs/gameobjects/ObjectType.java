@@ -1,20 +1,23 @@
 package org.academiadecodigo.thunderstructs.gameobjects;
 
 public enum ObjectType {
-    PLAYER(50, 90),
-    DARTHVADER(50, 50),
-    REGULAR_BLOCK(50, 50),
-    DESTROYABLE_BLOCK(50,50),
-    SNIPPET_BLOCK(50,50);
+    PLAYER(50, 90, "character1.png"),
+    DARTHVADER(50, 50, "MiniDarthVader.png"),
+    REGULAR_BLOCK(50, 50, "bricket-block.jpeg"),
+    DESTROYABLE_BLOCK(50, 50, "bricket-block.jpeg"),
+    SNIPPET_BLOCK(50, 50, "bricket-block.jpeg");
 
 
     private int height;
     private int width;
+    private String picture;
 
 
-    ObjectType(int width, int height) {
+    ObjectType(int width, int height, String picture) {
         this.width = width;
         this.height = height;
+        this.picture = picture;
+
 
     }
 
@@ -24,5 +27,9 @@ public enum ObjectType {
 
     public int getWidth() {
         return width;
+    }
+
+    public String getPictureString() {
+        return picture;
     }
 }
