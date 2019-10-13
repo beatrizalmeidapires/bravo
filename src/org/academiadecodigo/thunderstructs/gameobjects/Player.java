@@ -242,6 +242,11 @@ public class Player extends GameObjects {
                 break;
             case KeyboardEvent.KEY_UP:
 
+                if (isCollisionOnBottom()) {
+                    setJumping(true);
+                    break;
+                }
+
                 if (position.getPosY() < Game.GAME_HEIGHT - ObjectType.PLAYER.getHeigth()) { //TODO: Change 2nd value once Collisions are working properly
                     break; //Send condition to "jumping" to allow continuous jumping while pressing up.
                 }
