@@ -1,9 +1,11 @@
 package org.academiadecodigo.thunderstructs;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.academiadecodigo.simplegraphics.graphics.*;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.thunderstructs.gameobjects.ObjectType;
 import org.academiadecodigo.thunderstructs.gameobjects.Player;
 import org.academiadecodigo.thunderstructs.gameobjects.Position;
@@ -19,7 +21,7 @@ public class Game {
     private RegularBlock block;
 
     public static final int GAME_WIDTH = 1200;
-    public static final int GAME_HEIGHT = 600;
+    public static final int GAME_HEIGHT = 624;
     public static final int MARGIN = 10;
     private Position targetPosition;
     private boolean win;
@@ -30,21 +32,24 @@ public class Game {
     }
 
     public void drawBackground() {
-        Rectangle background = new Rectangle(MARGIN, MARGIN, GAME_WIDTH, GAME_HEIGHT);
-        background.setColor(Color.DARK_GRAY);
-        background.fill();
+        //Rectangle background = new Rectangle(MARGIN, MARGIN, GAME_WIDTH, GAME_HEIGHT);
+        //background.setColor(Color.DARK_GRAY);
+        //background.fill();
+
+        Picture backgroundPicture = new Picture(MARGIN,MARGIN, "beautiful.png");
+        backgroundPicture.draw();
     }
 
     public void init() {
-        position = new Position(900, 200);
+        position = new Position(100, GAME_HEIGHT - ObjectType.PLAYER.getHeigth() + MARGIN);
         position1 = new Position(400, 200);
-        player = new Player(position, "character1.png");
+        player = new Player(position, "picture.png");
         player1 = new Player(position1, "character2.png");
         player1.drawObject();
         player.drawObject();
 
-        blockPosition = new Position(600, GAME_HEIGHT - ObjectType.REGULAR_BLOCK.getHeigth());
-        block = new RegularBlock (blockPosition,"character2.png");
+        blockPosition = new Position(600, GAME_HEIGHT - ObjectType.REGULAR_BLOCK.getHeigth() + MARGIN);
+        block = new RegularBlock (blockPosition,"brickblock.png");
         block.drawObject();
     }
 
@@ -66,6 +71,7 @@ public class Game {
             }
             player.jump();
             player.gravity();
+            //System.out.println(player.getPosY() + 134);
         }
 
     }
