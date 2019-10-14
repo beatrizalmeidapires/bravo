@@ -11,14 +11,7 @@ public class Player extends GameObjects {
     private boolean right;
     private boolean left;
     private boolean jumping;
-    private boolean falling;
     private int speed;
-
-    private boolean collRight;
-    private boolean collLeft;
-    private boolean collTop;
-    private boolean collBottom;
-
 
     private int currentJumpSpeed;
     private int jumpCounter;
@@ -259,7 +252,6 @@ public class Player extends GameObjects {
     }
 
 
-
     public int getPosX() {
         return this.position.getPosX();
     }
@@ -279,38 +271,4 @@ public class Player extends GameObjects {
     public void setJumping (boolean setStatus) {
         this.jumping = setStatus;
     }
-
-
-    public boolean isCollRight() {
-        return collRight;
-    }
-
-    public boolean isCollLeft() {
-        return collLeft;
-    }
-
-    public boolean isCollTop() {
-        return collTop;
-    }
-
-    public boolean isCollBottom() {
-        return collBottom;
-    }
-
-    public void setCollRight(boolean collRight) {
-        this.collRight = collRight;
-    }
-
-    public void setCollLeft(boolean collLeft) {
-        this.collLeft = collLeft;
-    }
-
-    public void setCollTop(boolean collTop) {
-        this.collTop = collTop;
-    }
-
-    public void setCollBottom(boolean collBottom) {
-        this.collBottom = collBottom;
-    }
-
 }
