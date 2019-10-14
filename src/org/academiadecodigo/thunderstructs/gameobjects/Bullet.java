@@ -12,7 +12,7 @@ public class Bullet extends GameObjects implements Physics {
 
 
     public Bullet(Position position, String picture, int speed) {
-        super(position, new Picture(position.getPosX(), position.getPosY(), picture));
+        super(position, new Picture(position.getPosX(), position.getPosY(), picture), ObjectType.REGULAR_BLOCK);
         this.position = position;
         this.speed = speed;
     }
@@ -32,8 +32,3 @@ public class Bullet extends GameObjects implements Physics {
 //As balas devem estar associadas a uma tecla (space)
 //Cada vez que a tecla for primida uma bala vai ser instanciada.
 //a bala deve ter speed constante quando for instanciada.
-
-
-
-
-}
