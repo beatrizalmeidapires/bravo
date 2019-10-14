@@ -12,6 +12,10 @@ public class GameObjects implements Physics, KeyboardHandler {
     private Picture objectImage;
     private boolean gravity;
 
+    private int maxGravitySpeed;
+    private int currentGravitySpeed;
+    private int gravityCounter;
+
     private boolean collisionOnTop;
     private boolean collisionOnBottom;
     private boolean collisionOnLeft;
@@ -23,12 +27,15 @@ public class GameObjects implements Physics, KeyboardHandler {
 
 
 
-    public GameObjects(Position position, Picture objectImage, ObjectType objectType) {
+    public GameObjects (Position position, Picture objectImage, ObjectType objectType) {
         this.position = position;
         this.objectImage = objectImage;
         this.gravity = true;
         this.width = objectType.getWidth();
         this.height = objectType.getHeigth();
+
+        this.currentGravitySpeed = 0;
+        this.maxGravitySpeed = 3;
     }
 
     public void drawObject() {
@@ -46,11 +53,40 @@ public class GameObjects implements Physics, KeyboardHandler {
         if (!gravity) {
             return;
         }
-
-        if (!(position.getPosY() >= Game.GAME_HEIGHT - 80) && !isCollisionOnBottom()) {
-            objectImage.translate(0, +2);
-            position.setPosY(position.getPosY() + 2);
+/*
+        if (position.getPosY() >= Game.GAME_HEIGHT - 80) {
+            currentGravitySpeed = 0;
+            return;
         }
+
+        if (isCollisionOnBottom()) {
+            currentGravitySpeed = 0;
+            return;
+        }
+*/
+        if (!(position.getPosY() >= Game.GAME_HEIGHT - 80) && !isCollisionOnBottom()) {
+
+            if (gravityCounter == 4) {
+                currentGravitySpeed++; //1
+            }
+
+            if (gravityCounter == 8) {
+                currentGravitySpeed++; //2
+            }
+
+            if (gravityCounter == 12)
+                currentGravitySpeed++; //3
+
+            System.out.println(currentGravitySpeed);
+
+            gravityCounter++;
+            objectImage.translate(0, +currentGravitySpeed);
+            position.setPosY(position.getPosY() + currentGravitySpeed);
+        } else {
+            gravityCounter = 0;
+            currentGravitySpeed = 0;
+        }
+
 
         UtilityMethods.pause(7);
     }
@@ -65,7 +101,7 @@ public class GameObjects implements Physics, KeyboardHandler {
 
     public void moveDown() {
 
-        if (!(position.getPosY() >= Game.GAME_HEIGHT - 40)) {
+        if (!(position.getPosY() >= Game.GAME_HEIGHT - ObjectType.PLAYER.getHeigth())) {
             objectImage.translate(0, 10);
             position.setPosY(position.getPosY() + 10);
         }

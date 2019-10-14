@@ -38,10 +38,7 @@ public class Game {
 
     public void init() {
         position = new Position(100, GAME_HEIGHT - ObjectType.PLAYER.getHeigth() + MARGIN);
-        position1 = new Position(400, 200);
         player = new Player(position, "picture.png");
-        player1 = new Player(position1, "character2.png");
-        player1.drawObject();
         player.drawObject();
 
         blockPosition = new Position(600, GAME_HEIGHT - 70);
@@ -64,17 +61,14 @@ public class Game {
         startKeyboard();
         while (!win) {
 
-            System.out.println(player.getPosX());
-
             if (player.getPosX() >= targetPosition.getPosX()) {
                 Text winMessage = new Text(500, 500, "You win bro");
                 winMessage.draw();
                 winMessage.grow(300, 300);
 
-                System.out.println("Agora é que é!!");
                 win = true;
-
             }
+
             player.gravity();
             player.tick();
 
@@ -87,9 +81,7 @@ public class Game {
             //player.setCollisionOnBottom(bounds.checkCollisionOnBottom(player,block2));
             //player.setCollisionOnLeft(bounds.checkCollisionOnLeft(player, block2));
             //player.setCollisionOnRight(bounds.checkCollisionOnRight(player, block2));
-
         }
-
     }
 
     public void startKeyboard() {
