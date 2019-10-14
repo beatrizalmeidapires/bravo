@@ -14,6 +14,12 @@ public class Player extends GameObjects {
     private boolean falling;
     private int speed;
 
+    private boolean collRight;
+    private boolean collLeft;
+    private boolean collTop;
+    private boolean collBottom;
+
+
     private int currentJumpSpeed;
     private int jumpCounter;
 
@@ -143,7 +149,6 @@ public class Player extends GameObjects {
 
         position.setPosY(getPosY() - currentJumpSpeed);
         characterImage.translate(0,- currentJumpSpeed);
-        UtilityMethods.pause(7);
         jumpCounter++;
 
         if (jumpCounter >= 50) {
@@ -193,12 +198,6 @@ public class Player extends GameObjects {
             setJumping(false);
             setGravity(true);
         }
-
-        /*
-        if (falling) {
-            gravity();
-        }
-        */
     }
 
     public void smoothJump () {
@@ -282,12 +281,36 @@ public class Player extends GameObjects {
     }
 
 
-    public void setFalling (boolean setStatus) {
-        this.falling = setStatus;
+    public boolean isCollRight() {
+        return collRight;
     }
 
-    public boolean getRight () {
-        return this.right;
+    public boolean isCollLeft() {
+        return collLeft;
+    }
+
+    public boolean isCollTop() {
+        return collTop;
+    }
+
+    public boolean isCollBottom() {
+        return collBottom;
+    }
+
+    public void setCollRight(boolean collRight) {
+        this.collRight = collRight;
+    }
+
+    public void setCollLeft(boolean collLeft) {
+        this.collLeft = collLeft;
+    }
+
+    public void setCollTop(boolean collTop) {
+        this.collTop = collTop;
+    }
+
+    public void setCollBottom(boolean collBottom) {
+        this.collBottom = collBottom;
     }
 
 }

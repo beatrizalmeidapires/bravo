@@ -53,17 +53,7 @@ public class GameObjects implements Physics, KeyboardHandler {
         if (!gravity) {
             return;
         }
-/*
-        if (position.getPosY() >= Game.GAME_HEIGHT - 80) {
-            currentGravitySpeed = 0;
-            return;
-        }
 
-        if (isCollisionOnBottom()) {
-            currentGravitySpeed = 0;
-            return;
-        }
-*/
         if (!(position.getPosY() >= Game.GAME_HEIGHT - 80) && !isCollisionOnBottom()) {
 
             if (gravityCounter == 6) {
@@ -87,37 +77,35 @@ public class GameObjects implements Physics, KeyboardHandler {
             currentGravitySpeed = 0;
         }
 
-
-        UtilityMethods.pause(7);
     }
 
     public void moveUp() {
 
         if (!(position.getPosY() <= Game.MARGIN)) {
-            objectImage.translate(0, -10);
-            position.setPosY(position.getPosY() - 10);
+            objectImage.translate(0, -1);
+            position.setPosY(position.getPosY() - 1);
         }
     }
 
     public void moveDown() {
 
         if (!(position.getPosY() >= Game.GAME_HEIGHT - ObjectType.PLAYER.getHeigth())) {
-            objectImage.translate(0, 10);
-            position.setPosY(position.getPosY() + 10);
+            objectImage.translate(0, 1);
+            position.setPosY(position.getPosY() + 1);
         }
     }
 
     public void moveLeft() {
         if (!(position.getPosX() <= Game.MARGIN)) {
-            objectImage.translate(-10, 0);
-            position.setPosX(position.getPosX() - 10);
+            objectImage.translate(-1, 0);
+            position.setPosX(position.getPosX() - 1);
         }
     }
 
     public void moveRight() {
         if (!(position.getPosX() >= Game.GAME_WIDTH - 60)) {
-            objectImage.translate(10, 0);
-            position.setPosX(position.getPosX() + 10);
+            objectImage.translate(1, 0);
+            position.setPosX(position.getPosX() + 1);
         }
     }
 

@@ -10,6 +10,9 @@ public class Enemy extends GameObjects {
     private Picture enemyImage;
     private boolean isDead;
 
+    //last movement indicates the last movement through a boolean: true = left; false = right
+    private boolean lastMovment;
+
 
     public Enemy(Position position, String picture) {
 
@@ -25,27 +28,24 @@ public class Enemy extends GameObjects {
 
     public void move() {
 
-        while (!isDead) {
 
-            int random = (int) (Math.floor(Math.random() + 1.5));
+        if (position.getPosX() > Game.GAME_WIDTH -200) {
 
-            //Right
-            if (random == 1) {
-                while (!(position.getPosX() >= Game.GAME_WIDTH - (ObjectType.DARTHVADER.getWidth() + Game.MARGIN))) {
-                    UtilityMethods.pause(70);
-                    moveRight();
-                }
+            lastMovment = true;
+        }
 
+        if (position.getPosX() < 200) {
 
-            }
-            //Left
-            if (random == 2) {
-                while (!(position.getPosX() <= Game.MARGIN)) {
-                    UtilityMethods.pause(70);
-                    moveLeft();
-                }
+            lastMovment = false;
+        }
 
-            }
+        if (!lastMovment) {
+            moveRight();
+
+        }
+        //Left
+        if (lastMovment) {
+            moveLeft();
         }
     }
 }

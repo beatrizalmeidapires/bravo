@@ -1,22 +1,20 @@
 package org.academiadecodigo.thunderstructs;
 
 import org.academiadecodigo.simplegraphics.graphics.*;
-import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.thunderstructs.gameobjects.*;
 
 public class Game {
 
     private Position position;
-    private Position position1;
     private Position blockPosition;
     private Position blockPosition2;
     private Player player;
-    private Player player1;
     private RegularBlock block;
     private RegularBlock block2;
+
+    private GameObjects[] worldObjects;
+
     private ObjectBoundaries bounds;
 
     public static final int GAME_WIDTH = 1200;
@@ -37,95 +35,97 @@ public class Game {
     }
 
     public void init() {
-        position = new Position(100, GAME_HEIGHT - ObjectType.PLAYER.getHeigth() + MARGIN);
+        position = new Position(100, GAME_HEIGHT - ObjectType.PLAYER.getHeigth());
         player = new Player(position, "picture.png");
         player.drawObject();
 
-        blockPosition = new Position(600, GAME_HEIGHT - 70);
+        blockPosition = new Position(600, GAME_HEIGHT - ObjectType.REGULAR_BLOCK.getHeigth());
         block = new RegularBlock (blockPosition,"brickblock.png");
         block.drawObject();
 
-
-        //blockPosition2 = new Position(550, GAME_HEIGHT - ObjectType.REGULAR_BLOCK.getHeigth());
-        //block2 = new RegularBlock (blockPosition2,"brickblock.png");
-        //block2.drawObject();
-
+        blockPosition2 = new Position(800, GAME_HEIGHT - ObjectType.REGULAR_BLOCK.getHeigth());
+        block2 = new RegularBlock (blockPosition2,"MiniDarthVader.png");
+        block2.drawObject();
 
         this.bounds = new ObjectBoundaries();
+
+        this.worldObjects = new GameObjects[]{block2, block};
     }
 
 
     public void start() {
 
         init();
-        startKeyboard();
+        UtilityMethods.startKeyboard(player);
         while (!win) {
 
             if (player.getPosX() >= targetPosition.getPosX()) {
-                Text winMessage = new Text(500, 500, "You win bro");
-                winMessage.draw();
-                winMessage.grow(300, 300);
-
+                winAnimation();
                 win = true;
             }
 
-            player.gravity();
+            checkAllColls(player, worldObjects);
+
+
             player.tick();
+            player.gravity();
 
-            player.setCollisionOnTop(bounds.checkCollisionOnTop(player, block));
-            player.setCollisionOnBottom(bounds.checkCollisionOnBottom(player,block));
-            player.setCollisionOnLeft(bounds.checkCollisionOnLeft(player, block));
-            player.setCollisionOnRight(bounds.checkCollisionOnRight(player, block));
 
-            //player.setCollisionOnTop(bounds.checkCollisionOnTop(player, block2));
-            //player.setCollisionOnBottom(bounds.checkCollisionOnBottom(player,block2));
-            //player.setCollisionOnLeft(bounds.checkCollisionOnLeft(player, block2));
-            //player.setCollisionOnRight(bounds.checkCollisionOnRight(player, block2));
+
+            UtilityMethods.pause(7);
         }
     }
 
-    public void startKeyboard() {
+    public void checkAllColls (GameObjects movable, GameObjects[] objects) {
 
-        Keyboard keyboard = new Keyboard(player);
+        boolean collRight = false;
+        boolean collLeft = false;
+        boolean collTop = false;
+        boolean collBottom = false;
 
-        KeyboardEvent left = new KeyboardEvent();
-        KeyboardEvent leftReleased = new KeyboardEvent();
+        for (GameObjects o : objects) {
 
-        KeyboardEvent right = new KeyboardEvent();
-        KeyboardEvent rightReleased = new KeyboardEvent();
+            if (bounds.checkCollisionOnRight(movable, o)) {
+                collRight = true;
+            }
 
-        KeyboardEvent up = new KeyboardEvent();
-        KeyboardEvent down = new KeyboardEvent();
-        KeyboardEvent jump = new KeyboardEvent();
+            if (bounds.checkCollisionOnLeft(movable, o)) {
+                collLeft = true;
+            }
 
-        left.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        left.setKey(KeyboardEvent.KEY_LEFT);
-        leftReleased.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
-        leftReleased.setKey(KeyboardEvent.KEY_LEFT);
+            if (bounds.checkCollisionOnTop(movable, o)) {
+                collTop = true;
+            }
 
-        right.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        right.setKey(KeyboardEvent.KEY_RIGHT);
-        rightReleased.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
-        rightReleased.setKey(KeyboardEvent.KEY_RIGHT);
+            if (bounds.checkCollisionOnBottom(movable, o)) {
+                collBottom = true;
+            }
 
-        up.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        up.setKey(KeyboardEvent.KEY_UP);
+        }
 
-        down.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        down.setKey(KeyboardEvent.KEY_DOWN);
-
-        jump.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        jump.setKey(KeyboardEvent.KEY_SPACE);
-
-        keyboard.addEventListener(left);
-        keyboard.addEventListener(leftReleased);
-
-        keyboard.addEventListener(right);
-        keyboard.addEventListener(rightReleased);
-
-
-        keyboard.addEventListener(up);
-        keyboard.addEventListener(down);
-        keyboard.addEventListener(jump);
+        movable.setCollisionOnRight(collRight);
+        movable.setCollisionOnLeft(collLeft);
+        movable.setCollisionOnTop(collTop);
+        movable.setCollisionOnBottom(collBottom);
     }
+
+    private void winAnimation(){
+
+        Text winMessage = new Text(600, 300, "You win bro");
+        winMessage.setColor(Color.GREEN);
+        winMessage.draw();
+        UtilityMethods.pause(100);
+        winMessage.grow(50, 50);
+        UtilityMethods.pause(100);
+        winMessage.grow(50, 50);
+        UtilityMethods.pause(100);
+        winMessage.grow(50, 50);
+        UtilityMethods.pause(100);
+        winMessage.grow(50, 50);
+        UtilityMethods.pause(100);
+        winMessage.grow(50, 50);
+        UtilityMethods.pause(100);
+        winMessage.grow(50, 50);
+    }
+
 }
