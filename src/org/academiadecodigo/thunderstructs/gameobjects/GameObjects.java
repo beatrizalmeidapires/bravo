@@ -66,15 +66,15 @@ public class GameObjects implements Physics, KeyboardHandler {
 */
         if (!(position.getPosY() >= Game.GAME_HEIGHT - 80) && !isCollisionOnBottom()) {
 
-            if (gravityCounter == 4) {
+            if (gravityCounter == 6) {
                 currentGravitySpeed++; //1
             }
 
-            if (gravityCounter == 8) {
+            if (gravityCounter == 14) {
                 currentGravitySpeed++; //2
             }
 
-            if (gravityCounter == 12)
+            if (gravityCounter == 24)
                 currentGravitySpeed++; //3
 
             System.out.println(currentGravitySpeed);
