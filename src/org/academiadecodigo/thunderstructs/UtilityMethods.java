@@ -27,7 +27,7 @@ public final class UtilityMethods {
 
         KeyboardEvent up = new KeyboardEvent();
         KeyboardEvent down = new KeyboardEvent();
-        KeyboardEvent jump = new KeyboardEvent();
+        KeyboardEvent shoot = new KeyboardEvent();
 
         left.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         left.setKey(KeyboardEvent.KEY_LEFT);
@@ -45,8 +45,8 @@ public final class UtilityMethods {
         down.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         down.setKey(KeyboardEvent.KEY_DOWN);
 
-        jump.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        jump.setKey(KeyboardEvent.KEY_SPACE);
+        shoot.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        shoot.setKey(KeyboardEvent.KEY_SPACE);
 
         keyboard.addEventListener(left);
         keyboard.addEventListener(leftReleased);
@@ -57,7 +57,7 @@ public final class UtilityMethods {
 
         keyboard.addEventListener(up);
         keyboard.addEventListener(down);
-        keyboard.addEventListener(jump);
+        keyboard.addEventListener(shoot);
     }
 
 

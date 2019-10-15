@@ -17,15 +17,17 @@ public class Bullet extends GameObjects implements Physics {
         this.speed = speed;
     }
 
+    /*
+    public void shoot () {
 
-    //player method
-    /*private boolean shoot = false;
-
-    public void bulletShoot() {
-        if (hitted) {
-            this.picture.delete();
+        if (player.isShooting()) {
+            Position bulletPosition = new Position(player.getPosX(), player.getPosY());
+            this.bullet = new Bullet (bulletPosition, "destroyableblock.png", 7 );
+            bullet.drawObject();
         }
-    } */
+
+    }
+    */
 }
 
 //As balas podem ser disparadas para a esquerda ou para a direita.

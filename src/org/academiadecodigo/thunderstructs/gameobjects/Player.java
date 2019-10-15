@@ -11,6 +11,8 @@ public class Player extends GameObjects {
     private boolean right;
     private boolean left;
     private boolean jumping;
+    private boolean shooting;
+
     private int speed;
 
     private int currentJumpSpeed;
@@ -247,6 +249,7 @@ public class Player extends GameObjects {
                 break;
 
             case KeyboardEvent.KEY_SPACE:
+                shooting = true;
                 break;
         }
     }
@@ -270,5 +273,9 @@ public class Player extends GameObjects {
 
     public void setJumping (boolean setStatus) {
         this.jumping = setStatus;
+    }
+
+    public boolean isShooting () {
+        return this.shooting;
     }
 }
