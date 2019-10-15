@@ -2,7 +2,7 @@ package org.academiadecodigo.thunderstructs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class Bullet extends GameObjects implements Physics {
+public class Bullet extends GameObjects {
 
     private Picture picture;
     private Position position;

@@ -4,9 +4,8 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.thunderstructs.Game;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
-import org.academiadecodigo.thunderstructs.UtilityMethods;
 
-public class GameObjects implements Physics, KeyboardHandler {
+public class GameObjects implements KeyboardHandler {
 
     private Position position;
     private Picture objectImage;
@@ -42,12 +41,6 @@ public class GameObjects implements Physics, KeyboardHandler {
         objectImage.draw();
     }
 
-    @Override
-    public void collision() {
-
-    }
-
-    @Override
     public void gravity() {
 
         if (!gravity) {
