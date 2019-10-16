@@ -4,12 +4,17 @@ import org.academiadecodigo.simplegraphics.graphics.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.thunderstructs.gameobjects.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Game {
 
     public static final int GAME_WIDTH = 1511;
     public static final int GAME_HEIGHT = 850;
     public static final int MARGIN = 10;
 
+    private Object[] worldObjects;
     private Picture backgroundPicture;
 
     private Position playerPosition;
@@ -67,12 +72,21 @@ public class Game {
 
     public void init() {
         playerPosition = new Position(100, GAME_HEIGHT - ObjectType.PLAYER.getHeigth());
-        player = new Player(playerPosition, "picture.png");
+        player = new Player(playerPosition, "picture.png", this);
 
         blocks = gameBlocks.getRegularBlocks();
         enemies = gameBlocks.getEnemies();
 
-        this.bounds = new ObjectBoundaries();
+        //worldObjects = new GameObjects[blocks.length + enemies.length];
+
+
+        List<GameObjects> list = new ArrayList<>(Arrays.asList(enemies));
+        list.addAll(Arrays.asList(blocks));
+        worldObjects = list.toArray();
+
+
+
+        bounds = new ObjectBoundaries();
     }
 
     public void startMenu () {
@@ -218,6 +232,10 @@ public class Game {
         movable.setCollisionOnBottomLeft(collBottomLeft);
         movable.setCollisionOnBottomRight(collBottomRight);
 
+    }
+
+    public Object[] getWorldObjects () {
+        return this.worldObjects;
     }
 
     private void winAnimation(){

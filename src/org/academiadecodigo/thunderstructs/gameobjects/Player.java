@@ -6,6 +6,7 @@ import org.academiadecodigo.thunderstructs.Game;
 
 public class Player extends GameObjects {
 
+    private Game game;
     private boolean playGame;
     private boolean quit;
 
@@ -31,7 +32,7 @@ public class Player extends GameObjects {
     private Picture characterImage;
 
 
-    public Player(Position position, String picture) {
+    public Player(Position position, String picture, Game game) {
 
         super(position, new Picture(position.getPosX(), position.getPosY(), picture), ObjectType.PLAYER);
         this.position = position;
@@ -40,6 +41,7 @@ public class Player extends GameObjects {
         this.currentJumpSpeed = 3;
         this.currentRightSpeed = 1;
         this.rightMovementCounter = 0;
+        this.game = game;
 
     }
 
@@ -60,9 +62,17 @@ public class Player extends GameObjects {
             currentRightSpeed = speed;
         }
 
+        for (Object o : game.getWorldObjects()) {
+
+            if (!(o instanceof GameObjects)) {
+                return;
+            }
+
+            ((GameObjects)o).getObjectImage().translate(-currentRightSpeed,0);
+            ((GameObjects)o).getPosition().setPosX(((GameObjects)o).getPosition().getPosX() - currentRightSpeed);
+        }
+
         rightMovementCounter++;
-        super.getObjectImage().translate(currentRightSpeed, 0);
-        position.setPosX(position.getPosX() + currentRightSpeed);
     }
 
     public void stopRight () {
@@ -107,9 +117,24 @@ public class Player extends GameObjects {
             currentLeftSpeed = speed;
         }
 
+        for (Object o : game.getWorldObjects()) {
+
+            if (!(o instanceof GameObjects)) {
+                return;
+            }
+
+            ((GameObjects)o).getObjectImage().translate(+currentLeftSpeed,0);
+            ((GameObjects)o).getPosition().setPosX(((GameObjects)o).getPosition().getPosX() + currentLeftSpeed);
+        }
+
         leftMovementCounter++;
-        super.getObjectImage().translate(-currentLeftSpeed, 0);
-        position.setPosX(position.getPosX() - currentLeftSpeed);
+
+
+
+
+       // leftMovementCounter++;
+       // super.getObjectImage().translate(-currentLeftSpeed, 0);
+       // position.setPosX(position.getPosX() - currentLeftSpeed);
     }
 
     public void stopLeft() {

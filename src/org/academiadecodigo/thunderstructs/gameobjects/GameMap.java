@@ -8,6 +8,7 @@ public class GameMap {
     private Enemy[] enemies;
     private Position[] blockPositions;
     private Position[] enemyPositions;
+    private Position[] worldObjects;
 
     public GameMap(){
 
