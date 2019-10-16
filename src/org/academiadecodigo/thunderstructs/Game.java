@@ -90,7 +90,7 @@ public class Game {
     public void startMenu () {
 
         Position gameMenuPosition = new Position((GAME_WIDTH/2) - (ObjectType.MENU.getWidth()/2),(GAME_HEIGHT/2) - (ObjectType.MENU.getHeigth()/2));
-        this.menuController = new GameMenu(gameMenuPosition, "background.png");
+        this.menuController = new GameMenu(gameMenuPosition, "graphics/background.png");
         menuController.drawObject();
 
         UtilityMethods.startKeyboard(menuController);
