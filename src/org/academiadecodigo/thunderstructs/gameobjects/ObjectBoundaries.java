@@ -40,13 +40,13 @@ public class ObjectBoundaries {
     private void getSideBounds(GameObjects gb1, GameObjects gb2){
         object1LeftX = gb1.getPosition().getPosX();
         object1RightX = gb1.getPosition().getPosX() + gb1.getWidth();
-        object1InitY = gb1.getPosition().getPosY();
-        object1FinalY = gb1.getPosition().getPosY() + gb1.getHeight();
+        object1InitY = gb1.getPosition().getPosY() + 2;
+        object1FinalY = gb1.getPosition().getPosY() + gb1.getHeight() - 2;
 
         object2LeftX = gb2.getPosition().getPosX();
         object2RightX = gb2.getPosition().getPosX() + gb2.getWidth();
-        object2InitY = gb2.getPosition().getPosY();
-        object2FinalY = gb2.getPosition().getPosY() + gb2.getHeight();
+        object2InitY = gb2.getPosition().getPosY() + 2;
+        object2FinalY = gb2.getPosition().getPosY() + gb2.getHeight() - 2;
     }
 
     public boolean checkCollisionOnTop(GameObjects gb1, GameObjects gb2){

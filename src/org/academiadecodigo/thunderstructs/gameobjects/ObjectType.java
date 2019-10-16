@@ -2,8 +2,9 @@ package org.academiadecodigo.thunderstructs.gameobjects;
 
 public enum ObjectType {
     PLAYER(70, 80, "graphics/hero2.png"),
-    DARTHVADER(50, 50, "MiniDarthVader.png"),
+    ENEMY(50, 50, "MiniDarthVader.png"),
     REGULAR_BLOCK(80, 50, "bricket-block.jpeg"),
+
     DESTROYABLE_BLOCK(50, 80, "bricket-block.jpeg"),
     SNIPPET_BLOCK(50, 50, "bricket-block.jpeg");
 

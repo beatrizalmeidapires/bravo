@@ -1,7 +1,6 @@
 package org.academiadecodigo.thunderstructs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.academiadecodigo.thunderstructs.Game;
 
 public class Enemy extends GameObjects {
 
@@ -11,7 +10,7 @@ public class Enemy extends GameObjects {
 
     public Enemy(Position position, String picture) {
 
-        super(position, new Picture(position.getPosX(), position.getPosY(), picture), ObjectType.DARTHVADER);
+        super(position, new Picture(position.getPosX(), position.getPosY(), picture), ObjectType.ENEMY);
         this.position = position;
         this.enemyImage = getObjectImage();
 
