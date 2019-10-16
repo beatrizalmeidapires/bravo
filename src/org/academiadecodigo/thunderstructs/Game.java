@@ -17,8 +17,11 @@ public class Game {
     private Position targetPosition;
     private boolean win;
 
+
+
     GameMap gameBlocks = new GameMap();
-    RegularBlock[] blocks;
+    GameObjects[] blocks;
+    GameObjects[] enemies;
 
     public Game() {
         this.targetPosition = new Position(1100, 0);
@@ -36,10 +39,18 @@ public class Game {
         player = new Player(playerPosition, "picture.png");
         player.drawObject();
 
+
+
+
         blocks = gameBlocks.getRegularBlocks();
+        enemies = gameBlocks.getEnemies();
 
         for (int i = 0; i < blocks.length; i++) {
             blocks[i].drawObject();
+        }
+
+        for (int i = 0; i < enemies.length; i++){
+            enemies[i].drawObject();
         }
 
         this.bounds = new ObjectBoundaries();
@@ -57,13 +68,56 @@ public class Game {
                 win = true;
             }
 
+
             checkAllColls(player, blocks);
+
 
             player.tick();
             player.gravity();
 
+            for (int i = 0; i < enemies.length; i++) {
+                if (enemies[i] instanceof Enemy) {
+                    enemies[i].gravity();
+                    ((Enemy) enemies[i]).move();
+                    checkEnemyColls(enemies[i], player);
+                    checkAllColls(enemies[i], blocks);
+                }
+            }
+
             UtilityMethods.pause(7);
         }
+    }
+
+
+
+    public void checkEnemyColls (GameObjects enemy, GameObjects player){
+
+        boolean collRight = false;
+        boolean collLeft = false;
+        boolean collTop = false;
+        boolean collBottom = false;
+
+        if (bounds.checkCollisionOnRight(enemy, player)) {
+            win = true;
+        }
+
+        if (bounds.checkCollisionOnLeft(enemy, player)) {
+            //enemy.setOppositeDirection();
+            win = true;
+        }
+
+        if (bounds.checkCollisionOnTop(enemy, player)) {
+            win = true;
+        }
+
+        if (bounds.checkCollisionOnBottom(enemy, player)) {
+            win = true;
+        }
+        enemy.setCollisionOnRight(collRight);
+        enemy.setCollisionOnLeft(collLeft);
+        enemy.setCollisionOnTop(collTop);
+        enemy.setCollisionOnBottom(collBottom);
+
     }
 
     public void checkAllColls (GameObjects movable, GameObjects[] objects) {
@@ -72,6 +126,8 @@ public class Game {
         boolean collLeft = false;
         boolean collTop = false;
         boolean collBottom = false;
+        boolean collBottomRight = false;
+        boolean collBottomLeft = false;
 
         for (GameObjects o : objects) {
 
@@ -90,6 +146,12 @@ public class Game {
             if (bounds.checkCollisionOnBottom(movable, o)) {
                 collBottom = true;
             }
+            if(bounds.checkCollisionOnBottomLeft(movable, o)){
+                collBottomLeft = true;
+            }
+            if(bounds.checkCollisionOnBottomRight(movable, o)){
+                collBottomRight = true;
+            }
 
         }
 
@@ -97,6 +159,9 @@ public class Game {
         movable.setCollisionOnLeft(collLeft);
         movable.setCollisionOnTop(collTop);
         movable.setCollisionOnBottom(collBottom);
+        movable.setCollisionOnBottomLeft(collBottomLeft);
+        movable.setCollisionOnBottomRight(collBottomRight);
+
     }
 
     private void winAnimation(){

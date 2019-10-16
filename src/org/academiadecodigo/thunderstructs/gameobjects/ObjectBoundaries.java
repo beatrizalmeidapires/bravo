@@ -72,4 +72,16 @@ public class ObjectBoundaries {
         return ((object1RightX - 1 == object2LeftX) || (object1RightX == object2LeftX) || (object1RightX + 1 == object2LeftX)) && (object1FinalY >= object2InitY && !(object1FinalY > (object2FinalY + gb1.getHeight())));
     }
 
+    public boolean checkCollisionOnBottomRight(GameObjects gb1, GameObjects gb2){
+        getSideBounds(gb1, gb2);
+        getTopBottomBounds(gb1, gb2);
+        return ((object1BottomY - 1 == object2TopY) || (object1BottomY == object2TopY) || (object1BottomY + 1 == object2TopY)) && ((object1FinalX + gb1.getWidth()) >= object2InitX && !((object1FinalX + gb1.getWidth()) > (object2FinalX + gb1.getWidth())));
+    }
+
+    public boolean checkCollisionOnBottomLeft(GameObjects gb1, GameObjects gb2){
+        getSideBounds(gb1, gb2);
+        getTopBottomBounds(gb1, gb2);
+        return ((object1BottomY - 1 == object2TopY) || (object1BottomY == object2TopY) || (object1BottomY + 1 == object2TopY)) && ((object1FinalX - gb1.getWidth()) >= object2InitX && !((object1FinalX - gb1.getWidth()) > (object2FinalX + gb1.getWidth())));
+    }
+
 }
