@@ -6,8 +6,8 @@ import org.academiadecodigo.thunderstructs.gameobjects.*;
 
 public class Game {
 
-    public static final int GAME_WIDTH = 1200;
-    public static final int GAME_HEIGHT = 624;
+    public static final int GAME_WIDTH = 1511;
+    public static final int GAME_HEIGHT = 850;
     public static final int MARGIN = 10;
 
     private Position playerPosition;
@@ -21,7 +21,7 @@ public class Game {
 
     GameMap gameBlocks = new GameMap();
     GameObjects[] blocks;
-    GameObjects[] enemies;
+    //GameObjects[] enemies;
 
     public Game() {
         this.targetPosition = new Position(1100, 0);
@@ -30,7 +30,7 @@ public class Game {
 
     public void drawBackground() {
 
-        Picture backgroundPicture = new Picture(MARGIN,MARGIN, "beautiful.png");
+        Picture backgroundPicture = new Picture(MARGIN,MARGIN, "graphics/background.png");
         backgroundPicture.draw();
     }
 
@@ -43,15 +43,15 @@ public class Game {
 
 
         blocks = gameBlocks.getRegularBlocks();
-        enemies = gameBlocks.getEnemies();
+        //enemies = gameBlocks.getEnemies();
 
         for (int i = 0; i < blocks.length; i++) {
             blocks[i].drawObject();
         }
 
-        for (int i = 0; i < enemies.length; i++){
-            enemies[i].drawObject();
-        }
+        //for (int i = 0; i < enemies.length; i++){
+        //    enemies[i].drawObject();
+        //}
 
         this.bounds = new ObjectBoundaries();
     }
@@ -75,14 +75,14 @@ public class Game {
             player.tick();
             player.gravity();
 
-            for (int i = 0; i < enemies.length; i++) {
+           /* for (int i = 0; i < enemies.length; i++) {
                 if (enemies[i] instanceof Enemy) {
                     enemies[i].gravity();
                     ((Enemy) enemies[i]).move();
                     checkEnemyColls(enemies[i], player);
                     checkAllColls(enemies[i], blocks);
                 }
-            }
+            }*/
 
             UtilityMethods.pause(7);
         }
