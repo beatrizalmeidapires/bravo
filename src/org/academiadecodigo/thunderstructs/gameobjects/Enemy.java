@@ -2,50 +2,55 @@ package org.academiadecodigo.thunderstructs.gameobjects;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.thunderstructs.Game;
-import org.academiadecodigo.thunderstructs.UtilityMethods;
 
 public class Enemy extends GameObjects {
 
     private Position position;
     private Picture enemyImage;
     private boolean isDead;
-
-    //last movement indicates the last movement through a boolean: true = left; false = right
-    private boolean lastMovment;
-
+    private int speed;
 
     public Enemy(Position position, String picture) {
 
         super(position, new Picture(position.getPosX(), position.getPosY(), picture), ObjectType.DARTHVADER);
         this.position = position;
         this.enemyImage = getObjectImage();
+        this.speed = 2;
 
     }
 
-    public void setDead(boolean dead) {
-        isDead = dead;
-    }
-
+    //last movement indicates the last movement through a boolean: true = left; false = right
+    private boolean lastMovment = false;
     public void move() {
 
-
-        if (position.getPosX() > Game.GAME_WIDTH -200) {
-
+        /*
+        if (position.getPosX() > Game.GAME_WIDTH - 200 || isCollisionOnRight()) {
             lastMovment = true;
         }
 
-        if (position.getPosX() < 200) {
+        if (position.getPosX() < 200 || isCollisionOnLeft()) {
 
             lastMovment = false;
-        }
+
+        }*/
+
+
 
         if (!lastMovment) {
-            moveRight();
+            if (isCollisionOnBottomRight()) {
+                moveRight();
+                return;
+            }
+            lastMovment = true;
+        }
+
+            if (isCollisionOnBottomLeft()) {
+                moveLeft();
+                return;
+            }
+            lastMovment = false;
 
         }
-        //Left
-        if (lastMovment) {
-            moveLeft();
-        }
-    }
+
+
 }

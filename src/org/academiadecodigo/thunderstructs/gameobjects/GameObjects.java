@@ -19,6 +19,8 @@ public class GameObjects implements KeyboardHandler {
     private boolean collisionOnBottom;
     private boolean collisionOnLeft;
     private boolean collisionOnRight;
+    private boolean collisionOnBottomRight;
+    private boolean collisionOnBottomLeft;
 
 
     private int width;
@@ -161,6 +163,14 @@ public class GameObjects implements KeyboardHandler {
         this.collisionOnRight = collisionOnRight;
     }
 
+    public void setCollisionOnBottomRight(boolean collisionOnBottomRight){
+        this.collisionOnBottomRight = collisionOnBottomRight;
+    }
+
+    public void setCollisionOnBottomLeft(boolean collisionOnBottomLeft){
+        this.collisionOnBottomLeft = collisionOnBottomLeft;
+    }
+
     public boolean isCollisionOnTop() {
         return collisionOnTop;
     }
@@ -175,6 +185,12 @@ public class GameObjects implements KeyboardHandler {
 
     public boolean isCollisionOnRight() {
         return collisionOnRight;
+    }
+    public boolean isCollisionOnBottomRight(){
+        return collisionOnBottomRight;
+    }
+    public boolean isCollisionOnBottomLeft(){
+        return collisionOnBottomLeft;
     }
 }
 
