@@ -21,7 +21,7 @@ public class Game {
 
     GameMap gameBlocks = new GameMap();
     GameObjects[] blocks;
-    //GameObjects[] enemies;
+    GameObjects[] enemies;
 
     public Game() {
         this.targetPosition = new Position(1100, 0);
@@ -34,33 +34,67 @@ public class Game {
         backgroundPicture.draw();
     }
 
-    public void init() {
-        playerPosition = new Position(100, GAME_HEIGHT - ObjectType.PLAYER.getHeigth());
-        player = new Player(playerPosition, "picture.png");
-        player.drawObject();
-
-
-
-
-        blocks = gameBlocks.getRegularBlocks();
-        //enemies = gameBlocks.getEnemies();
+    public void drawGame() {
 
         for (int i = 0; i < blocks.length; i++) {
             blocks[i].drawObject();
         }
 
-        //for (int i = 0; i < enemies.length; i++){
-        //    enemies[i].drawObject();
-        //}
+        for (int i = 0; i < enemies.length; i++){
+            enemies[i].drawObject();
+        }
+
+        player.drawObject();
+    }
+
+    public void init() {
+        playerPosition = new Position(100, GAME_HEIGHT - ObjectType.PLAYER.getHeigth());
+        player = new Player(playerPosition, "picture.png");
+
+        blocks = gameBlocks.getRegularBlocks();
+        enemies = gameBlocks.getEnemies();
 
         this.bounds = new ObjectBoundaries();
+
+
+    }
+
+    public void startMenu () {
+
+       init();
+       Rectangle menuRectangle = new Rectangle(9,10, 900, 500);
+       menuRectangle.setColor(Color.BLACK);
+
+       UtilityMethods.startKeyboard(player);
+
+        while (!player.getQuit()) {
+
+            menuRectangle.fill();
+
+            int menuChoice = 0;
+
+            if (player.getPlayGame()) {
+                player.setPlayGameFalse();
+                menuChoice = 1;
+            }
+
+            switch (menuChoice) {
+
+                case 0:
+                    break;
+
+                case 1:
+                    menuRectangle.delete();
+                    drawGame();
+                    start();
+                    break;
+            }
+        }
     }
 
 
     public void start() {
 
-        init();
-        UtilityMethods.startKeyboard(player);
         while (!win) {
 
             if (player.getPosX() >= targetPosition.getPosX()) {
@@ -68,22 +102,19 @@ public class Game {
                 win = true;
             }
 
-
             checkAllColls(player, blocks);
-
 
             player.tick();
             player.gravity();
 
-           /* for (int i = 0; i < enemies.length; i++) {
+           for (int i = 0; i < enemies.length; i++) {
                 if (enemies[i] instanceof Enemy) {
                     enemies[i].gravity();
                     ((Enemy) enemies[i]).move();
                     checkEnemyColls(enemies[i], player);
                     checkAllColls(enemies[i], blocks);
                 }
-            }*/
-
+           }
             UtilityMethods.pause(7);
         }
     }

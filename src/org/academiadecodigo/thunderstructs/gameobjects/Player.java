@@ -3,10 +3,11 @@ package org.academiadecodigo.thunderstructs.gameobjects;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.thunderstructs.Game;
-import org.academiadecodigo.thunderstructs.UtilityMethods;
 
 public class Player extends GameObjects {
 
+    private boolean playGame;
+    private boolean quit;
 
     private boolean right;
     private boolean left;
@@ -248,6 +249,14 @@ public class Player extends GameObjects {
 
             case KeyboardEvent.KEY_SPACE:
                 break;
+
+            case KeyboardEvent.KEY_R:
+                this.playGame = true;
+                break;
+
+            case KeyboardEvent.KEY_Q:
+                this.quit = true;
+                break;
         }
     }
 
@@ -270,5 +279,17 @@ public class Player extends GameObjects {
 
     public void setJumping (boolean setStatus) {
         this.jumping = setStatus;
+    }
+
+    public boolean getPlayGame () {
+        return this.playGame;
+    }
+
+    public boolean getQuit () {
+        return this.quit;
+    }
+
+    public void setPlayGameFalse () {
+        this.playGame = false;
     }
 }
