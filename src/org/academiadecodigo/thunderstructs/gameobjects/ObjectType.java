@@ -5,7 +5,8 @@ public enum ObjectType {
     DARTHVADER(50, 50, "MiniDarthVader.png"),
     REGULAR_BLOCK(80, 50, "bricket-block.jpeg"),
     DESTROYABLE_BLOCK(50, 80, "bricket-block.jpeg"),
-    SNIPPET_BLOCK(50, 50, "bricket-block.jpeg");
+    SNIPPET_BLOCK(50, 50, "bricket-block.jpeg"),
+    MENU(1000, 500, "destroyableblock.png");
 
 
     private int height;

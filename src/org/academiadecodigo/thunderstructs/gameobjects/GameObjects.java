@@ -11,6 +11,8 @@ public class GameObjects implements KeyboardHandler {
     private Picture objectImage;
     private boolean gravity;
 
+    private boolean replay;
+
     private int maxGravitySpeed;
     private int currentGravitySpeed;
     private int gravityCounter;
@@ -41,6 +43,10 @@ public class GameObjects implements KeyboardHandler {
 
     public void drawObject() {
         objectImage.draw();
+    }
+
+    public void deleteObject() {
+        objectImage.delete();
     }
 
     public void gravity() {
@@ -127,6 +133,10 @@ public class GameObjects implements KeyboardHandler {
                 break;
             case KeyboardEvent.KEY_UP:
                 moveUp();
+                break;
+
+            case KeyboardEvent.KEY_R:
+                this.replay = true;
                 break;
         }
     }

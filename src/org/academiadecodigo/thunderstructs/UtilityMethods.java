@@ -3,9 +3,14 @@ package org.academiadecodigo.thunderstructs;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
+import org.academiadecodigo.thunderstructs.gameobjects.GameObjects;
 import org.academiadecodigo.thunderstructs.gameobjects.Player;
 
+import java.awt.*;
+import java.security.Key;
+
 public final class UtilityMethods {
+
 
     public static void pause(int ms) {
         try {
@@ -15,7 +20,19 @@ public final class UtilityMethods {
         }
     }
 
-    public static void startKeyboard(Player player) {
+
+    public static void startMenuKeyboard(GameObjects gameMenu) {
+
+        Keyboard menuKeyboard = new Keyboard(gameMenu);
+
+        KeyboardEvent replay = new KeyboardEvent();
+
+        replay.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        replay.setKey(KeyboardEvent.KEY_R);
+
+    }
+
+    public static void startKeyboard(GameObjects player) {
 
         Keyboard keyboard = new Keyboard(player);
 

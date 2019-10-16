@@ -10,8 +10,11 @@ public class Game {
     public static final int GAME_HEIGHT = 850;
     public static final int MARGIN = 10;
 
+    private Picture backgroundPicture;
+
     private Position playerPosition;
     private Player player;
+    private GameMenu menuController;
     private ObjectBoundaries bounds;
 
     private Position targetPosition;
@@ -30,7 +33,7 @@ public class Game {
 
     public void drawBackground() {
 
-        Picture backgroundPicture = new Picture(MARGIN,MARGIN, "graphics/background.png");
+        this.backgroundPicture = new Picture(MARGIN,MARGIN, "graphics/background.png");
         backgroundPicture.draw();
     }
 
@@ -47,6 +50,21 @@ public class Game {
         player.drawObject();
     }
 
+    public void eraseGame() {
+
+        for (int i = 0; i < blocks.length; i++) {
+            blocks[i].getObjectImage().delete();
+        }
+
+        for (int i = 0; i < enemies.length; i++){
+            enemies[i].getObjectImage().delete();
+        }
+
+        player.getObjectImage().delete();
+        this.backgroundPicture.delete();
+
+    }
+
     public void init() {
         playerPosition = new Position(100, GAME_HEIGHT - ObjectType.PLAYER.getHeigth());
         player = new Player(playerPosition, "picture.png");
@@ -55,26 +73,23 @@ public class Game {
         enemies = gameBlocks.getEnemies();
 
         this.bounds = new ObjectBoundaries();
-
-
     }
 
     public void startMenu () {
 
-       init();
-       Rectangle menuRectangle = new Rectangle(9,10, 900, 500);
-       menuRectangle.setColor(Color.BLACK);
+        Position gameMenuPosition = new Position((GAME_WIDTH/2) - (ObjectType.MENU.getWidth()/2),(GAME_HEIGHT/2) - (ObjectType.MENU.getHeigth()/2));
+        this.menuController = new GameMenu(gameMenuPosition, "background.png");
+        menuController.drawObject();
 
-       UtilityMethods.startKeyboard(player);
+        UtilityMethods.startKeyboard(menuController);
 
-        while (!player.getQuit()) {
-
-            menuRectangle.fill();
+        while (!this.menuController.getQuit()) {
+            menuController.drawObject();
 
             int menuChoice = 0;
 
-            if (player.getPlayGame()) {
-                player.setPlayGameFalse();
+            if (this.menuController.getReplay()) {
+                this.menuController.setReplay();
                 menuChoice = 1;
             }
 
@@ -84,16 +99,26 @@ public class Game {
                     break;
 
                 case 1:
-                    menuRectangle.delete();
-                    drawGame();
+                    this.drawBackground();
+                    menuController.deleteObject();
                     start();
+
+                    win = false;
+                    eraseGame();
+                    //player.getPosition().setPosX(20);
+                    //player.getPosition().setPosY(0);
                     break;
+
             }
         }
     }
 
 
     public void start() {
+
+        init();
+        drawGame();
+        UtilityMethods.startKeyboard(player);
 
         while (!win) {
 
