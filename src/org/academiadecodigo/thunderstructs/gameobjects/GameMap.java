@@ -5,13 +5,19 @@ import org.academiadecodigo.thunderstructs.Game;
 public class GameMap {
 
     private RegularBlock[] blocks;
+    private Enemy[] enemies;
+    private Position[] blockPositions;
+    private Position[] enemyPositions;
 
     public GameMap(){
 
-        Position[] blockPositions;
+
 
         blockPositions = new Position[20];
         blocks = new RegularBlock[20];
+
+        enemyPositions = new Position[2];
+        enemies = new Enemy[2];
 
         blockPositions[0] = new Position(ObjectType.REGULAR_BLOCK.getWidth(), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth()));
         blockPositions[1] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 2), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth()));
@@ -55,9 +61,18 @@ public class GameMap {
         blocks[18] = new RegularBlock(blockPositions[18], "graphics/blue_block.png");
         blocks[19] = new RegularBlock(blockPositions[19], "graphics/green_block.png");
 
+        enemyPositions[0] = new Position(500, 0);
+        enemyPositions[1] = new Position(1000, 0);
+
+        enemies[0] = new Enemy(enemyPositions[0], "graphics/enemy1.png");
+        enemies[1] = new Enemy(enemyPositions[1], "graphics/enemy2.png");
+
     }
 
     public RegularBlock[] getRegularBlocks(){
         return blocks;
+    }
+    public Enemy[] getEnemies(){
+        return enemies;
     }
 }

@@ -90,17 +90,26 @@ public class GameObjects implements KeyboardHandler {
         }
     }
 
+    private int movesCounter = 0;
     public void moveLeft() {
         if (!(position.getPosX() <= Game.MARGIN)) {
-            objectImage.translate(-1, 0);
-            position.setPosX(position.getPosX() - 1);
+            if ((movesCounter % 2) == 0) {
+                objectImage.translate(-1, 0);
+                position.setPosX(position.getPosX() + -1);
+                movesCounter++;
+            }
+            movesCounter++;
         }
     }
 
     public void moveRight() {
         if (!(position.getPosX() >= Game.GAME_WIDTH - 60)) {
-            objectImage.translate(1, 0);
-            position.setPosX(position.getPosX() + 1);
+            if ((movesCounter % 2) == 0) {
+                objectImage.translate(1, 0);
+                position.setPosX(position.getPosX() + 1);
+                movesCounter++;
+            }
+            movesCounter++;
         }
     }
 
