@@ -62,6 +62,16 @@ public class Player extends GameObjects {
             currentRightSpeed = speed;
         }
 
+
+        if (position.getPosX() < (Game.GAME_WIDTH/2 + 200)) {
+
+            super.getObjectImage().translate(currentRightSpeed,0);
+            position.setPosX(position.getPosX() + currentRightSpeed);
+
+            rightMovementCounter++;
+            return;
+        }
+
         for (Object o : game.getWorldObjects()) {
 
             if (!(o instanceof GameObjects)) {
@@ -73,6 +83,9 @@ public class Player extends GameObjects {
         }
 
         rightMovementCounter++;
+
+        //super.getObjectImage().translate(currentRightSpeed,0);
+        //position.setPosX(position.getPosX() + currentRightSpeed);
     }
 
     public void stopRight () {
@@ -95,9 +108,30 @@ public class Player extends GameObjects {
             currentRightSpeed = 0;
         }
 
+        if (position.getPosX() < (Game.GAME_WIDTH/2 + 200)) {
+
+            super.getObjectImage().translate(currentRightSpeed,0);
+            position.setPosX(position.getPosX() + currentRightSpeed);
+
+            rightStoppingCounter++;
+            return;
+        }
+
+        for (Object o : game.getWorldObjects()) {
+
+            if (!(o instanceof GameObjects)) {
+                return;
+            }
+
+            ((GameObjects)o).getObjectImage().translate(-currentRightSpeed,0);
+            ((GameObjects)o).getPosition().setPosX(((GameObjects)o).getPosition().getPosX() - currentRightSpeed);
+        }
+
         rightStoppingCounter++;
-        super.getObjectImage().translate(currentRightSpeed, 0);
-        position.setPosX(position.getPosX() + currentRightSpeed);
+
+
+        //super.getObjectImage().translate(currentRightSpeed, 0);
+        //position.setPosX(position.getPosX() + currentRightSpeed);
     }
 
     @Override
@@ -117,6 +151,15 @@ public class Player extends GameObjects {
             currentLeftSpeed = speed;
         }
 
+        if (position.getPosX() > (Game.GAME_WIDTH/2 - 200)) {
+
+            super.getObjectImage().translate(-currentLeftSpeed, 0);
+            position.setPosX(position.getPosX() - currentLeftSpeed);
+
+            leftMovementCounter++;
+            return;
+        }
+
         for (Object o : game.getWorldObjects()) {
 
             if (!(o instanceof GameObjects)) {
@@ -128,9 +171,6 @@ public class Player extends GameObjects {
         }
 
         leftMovementCounter++;
-
-
-
 
        // leftMovementCounter++;
        // super.getObjectImage().translate(-currentLeftSpeed, 0);
@@ -156,9 +196,30 @@ public class Player extends GameObjects {
             currentLeftSpeed = 0;
         }
 
+        if (position.getPosX() > (Game.GAME_WIDTH/2 - 200)) {
+
+            super.getObjectImage().translate(-currentLeftSpeed, 0);
+            position.setPosX(position.getPosX() - currentLeftSpeed);
+
+            leftStoppingCounter++;
+            return;
+        }
+
+        for (Object o : game.getWorldObjects()) {
+
+            if (!(o instanceof GameObjects)) {
+                return;
+            }
+
+            ((GameObjects)o).getObjectImage().translate(+currentLeftSpeed,0);
+            ((GameObjects)o).getPosition().setPosX(((GameObjects)o).getPosition().getPosX() + currentLeftSpeed);
+        }
+
         leftStoppingCounter++;
-        super.getObjectImage().translate(-currentLeftSpeed, 0);
-        position.setPosX(position.getPosX() - currentLeftSpeed);
+
+
+        //super.getObjectImage().translate(-currentLeftSpeed, 0);
+        //position.setPosX(position.getPosX() - currentLeftSpeed);
     }
 
     public void jump () {

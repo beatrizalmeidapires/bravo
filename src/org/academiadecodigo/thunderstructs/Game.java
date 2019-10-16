@@ -25,14 +25,12 @@ public class Game {
     private Position targetPosition;
     private boolean win;
 
-
-
     GameMap gameBlocks = new GameMap();
     GameObjects[] blocks;
     GameObjects[] enemies;
 
     public Game() {
-        this.targetPosition = new Position(1100, 0);
+        this.targetPosition = new Position(4500, 0);
         this.win = false;
     }
 
@@ -109,10 +107,10 @@ public class Game {
 
             switch (menuChoice) {
 
-                case 0:
+                case 0: //Game menu
                     break;
 
-                case 1:
+                case 1: //Game play
                     this.drawBackground();
                     menuController.deleteObject();
                     start();
