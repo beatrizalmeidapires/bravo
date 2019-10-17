@@ -14,11 +14,11 @@ public class GameMap {
 
 
 
-        blockPositions = new Position[20];
-        blocks = new RegularBlock[20];
+        blockPositions = new Position[44];
+        blocks = new RegularBlock[44];
 
-        enemyPositions = new Position[2];
-        enemies = new Enemy[2];
+        enemyPositions = new Position[5];
+        enemies = new Enemy[5];
 
         blockPositions[0] = new Position(ObjectType.REGULAR_BLOCK.getWidth(), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth()));
         blockPositions[1] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 2), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth()));
@@ -41,6 +41,32 @@ public class GameMap {
         blockPositions[18] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 8), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth()*10));
         blockPositions[19] = new Position((ObjectType.REGULAR_BLOCK.getWidth()), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth()*8));
 
+
+        blockPositions[20] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 17), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 10));
+        blockPositions[21] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 17), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
+        blockPositions[22] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 19), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 8));
+        blockPositions[23] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 20), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 10));
+        blockPositions[24] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 21), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 10));
+        blockPositions[25] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 22), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 10));
+        blockPositions[26] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 23), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 10));
+        blockPositions[27] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 26), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 8));
+        blockPositions[28] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 26), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 4));
+        blockPositions[29] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 28), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 7));
+        blockPositions[30] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 29), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 2));
+        blockPositions[31] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 31), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 8));
+        blockPositions[32] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 31 - 25), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 4));
+        blockPositions[33] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 33), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
+        blockPositions[34] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 33), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 10 + 20));
+        blockPositions[35] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 35), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 12));
+        blockPositions[36] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 36), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 12));
+        blockPositions[37] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 37), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 12));
+        blockPositions[38] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 38), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 12));
+        blockPositions[39] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 40), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 9));
+        blockPositions[40] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 42), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
+        blockPositions[41] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 43), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
+        blockPositions[42] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 44), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
+        blockPositions[43] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 45), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
+
         blocks[0] = new RegularBlock(blockPositions[0], "graphics/green_block.png");
         blocks[1] = new RegularBlock(blockPositions[1], "graphics/green_block.png");
         blocks[2] = new RegularBlock(blockPositions[2], "graphics/blue_block.png");
@@ -62,11 +88,43 @@ public class GameMap {
         blocks[18] = new RegularBlock(blockPositions[18], "graphics/blue_block.png");
         blocks[19] = new RegularBlock(blockPositions[19], "graphics/green_block.png");
 
-        enemyPositions[0] = new Position(500, 0);
-        enemyPositions[1] = new Position(1000, 0);
+
+        blocks[20] = new RegularBlock(blockPositions[20], "graphics/green_block.png");
+        blocks[21] = new RegularBlock(blockPositions[21], "graphics/green_block.png");
+        blocks[22] = new RegularBlock(blockPositions[22], "graphics/blue_block.png");
+        blocks[23] = new RegularBlock(blockPositions[23], "graphics/blue_block.png");
+        blocks[24] = new RegularBlock(blockPositions[24], "graphics/green_block.png");
+        blocks[25] = new RegularBlock(blockPositions[25], "graphics/blue_block.png");
+        blocks[26] = new RegularBlock(blockPositions[26], "graphics/blue_block.png");
+        blocks[27] = new RegularBlock(blockPositions[27], "graphics/blue_block.png");
+        blocks[28] = new RegularBlock(blockPositions[28], "graphics/blue_block.png");
+        blocks[29] = new RegularBlock(blockPositions[29], "graphics/blue_block.png");
+        blocks[30] = new RegularBlock(blockPositions[30], "graphics/long_block_right.png");
+        blocks[31] = new RegularBlock(blockPositions[31], "graphics/long_block_center.png");
+        blocks[32] = new RegularBlock(blockPositions[32], "graphics/long_block_left.png");
+        blocks[33] = new RegularBlock(blockPositions[33], "graphics/blue_block.png");
+        blocks[34] = new RegularBlock(blockPositions[34], "graphics/blue_block.png");
+        blocks[35] = new RegularBlock(blockPositions[35], "graphics/blue_block.png");
+        blocks[36] = new RegularBlock(blockPositions[36], "graphics/blue_block.png");
+        blocks[37] = new RegularBlock(blockPositions[37], "graphics/blue_block.png");
+        blocks[38] = new RegularBlock(blockPositions[38], "graphics/blue_block.png");
+        blocks[39] = new RegularBlock(blockPositions[39], "graphics/green_block.png");
+        blocks[40] = new RegularBlock(blockPositions[40], "graphics/blue_block.png");
+        blocks[41] = new RegularBlock(blockPositions[41], "graphics/blue_block.png");
+        blocks[42] = new RegularBlock(blockPositions[42], "graphics/blue_block.png");
+        blocks[43] = new RegularBlock(blockPositions[43], "graphics/green_block.png");
+
+        enemyPositions[0] = new Position((ObjectType.ENEMY.getWidth() * 12), 0);
+        enemyPositions[1] = new Position((ObjectType.ENEMY.getWidth() * 25), 0);
+        enemyPositions[2] = new Position((ObjectType.ENEMY.getWidth() * 38), 0);
+        enemyPositions[3] = new Position((ObjectType.ENEMY.getWidth() * 46), Game.GAME_HEIGHT - (ObjectType.ENEMY.getHeigth() * 8));
+        enemyPositions[4] = new Position((ObjectType.ENEMY.getWidth() * 58), 0);
 
         enemies[0] = new Enemy(enemyPositions[0], "graphics/enemy1.png");
         enemies[1] = new Enemy(enemyPositions[1], "graphics/enemy2.png");
+        enemies[2] = new Enemy(enemyPositions[2], "graphics/enemy1.png");
+        enemies[3] = new Enemy(enemyPositions[3], "graphics/enemy2.png");
+        enemies[4] = new Enemy(enemyPositions[4], "graphics/enemy1.png");
 
     }
 
