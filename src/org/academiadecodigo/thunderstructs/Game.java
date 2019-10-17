@@ -191,7 +191,7 @@ public class Game {
 
         while (!win) {
 
-            if (player.getPosY() > (GAME_HEIGHT - ObjectType.PLAYER.getHeigth())) {
+            if (player.getPosY() > (GAME_HEIGHT - ObjectType.PLAYER.getHeigth() - 15)) {
                 win = true;
                 gameOver = true;
             }

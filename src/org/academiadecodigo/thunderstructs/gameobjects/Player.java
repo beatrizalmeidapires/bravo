@@ -137,6 +137,10 @@ public class Player extends GameObjects {
     @Override
     public void moveLeft () {
 
+        if (position.getPosX() < 100) {
+            return;
+        }
+
         leftStoppingCounter = 0; //if > 0 (rightMovementCounter--)
 
         if (leftMovementCounter == 8) {
@@ -276,6 +280,7 @@ public class Player extends GameObjects {
             }
 
             setJumping(false);
+            jumpCounter = 0;
             setGravity(true);
         }
     }
@@ -316,9 +321,9 @@ public class Player extends GameObjects {
             case KeyboardEvent.KEY_RIGHT:
                 setRight(true);
                 break;
-            case KeyboardEvent.KEY_DOWN:
-                moveDown();
-                break;
+            //case KeyboardEvent.KEY_DOWN:
+               // moveDown();
+                //break;
             case KeyboardEvent.KEY_SPACE:
 
                 if (isCollisionOnBottom()) {
