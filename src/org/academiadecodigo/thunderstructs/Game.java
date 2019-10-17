@@ -16,7 +16,6 @@ public class Game {
 
     private Music enemyMusic;
 
-
     private Object[] worldObjects;
     private Picture backgroundPicture;
 
@@ -26,11 +25,17 @@ public class Game {
     private GameMenu menuController;
     private GameMenu firstMenuImage;
     private GameMenu secondMenuImage;
+    private GameMenu gameOverImage;
+    private GameMenu gameWinImage;
 
     private ObjectBoundaries bounds;
 
     private Position targetPosition;
     private boolean win;
+    private boolean gameOver;
+    private int menuChoice = 0;
+
+
 
     GameMap gameBlocks = new GameMap();
     GameObjects[] blocks;
@@ -100,15 +105,14 @@ public class Game {
         this.menuController = new GameMenu(gameMenuPosition, "graphics/background.png", 0,0);
         menuController.drawObject();
 
-        Position firstMenuPosition = new Position((GAME_WIDTH/2) - (ObjectType.MENU.getWidth()/2),(GAME_HEIGHT/2) - (ObjectType.MENU.getHeigth()/2));
-        this.firstMenuImage = new GameMenu(firstMenuPosition, "graphics/corn_foot_2.jpg",firstMenuPosition.getPosX(),firstMenuPosition.getPosY());
-
-        Position secondMenuPosition = new Position((GAME_WIDTH/2) - (ObjectType.MENU.getWidth()/2),(GAME_HEIGHT/2) - (ObjectType.MENU.getHeigth()/2));
-        this.secondMenuImage = new GameMenu(secondMenuPosition, "graphics/corn_foot_1.png", firstMenuPosition.getPosX(), firstMenuPosition.getPosY());
+        Position menuPosition = new Position((GAME_WIDTH/2) - (ObjectType.MENU.getWidth()/2),(GAME_HEIGHT/2) - (ObjectType.MENU.getHeigth()/2));
+        this.firstMenuImage = new GameMenu(menuPosition, "graphics/corn_foot_2.jpg",menuPosition.getPosX(),menuPosition.getPosY());
+        this.secondMenuImage = new GameMenu(menuPosition, "graphics/corn_foot_1.png", menuPosition.getPosX(), menuPosition.getPosY());
+        this.gameOverImage = new GameMenu(menuPosition, "graphics/game_over.jpg", menuPosition.getPosX(), menuPosition.getPosY());
+        this.gameWinImage = new GameMenu(menuPosition, "graphics/win.jpg", menuPosition.getPosX(), menuPosition.getPosY());
 
         int imageFlashCounter = 0;
         boolean imageFlashCondition = false;
-
 
         UtilityMethods.startKeyboard(menuController);
 
@@ -131,8 +135,6 @@ public class Game {
                 imageFlashCondition = false;
             }
 
-            int menuChoice = 0;
-
             if (this.menuController.getReplay()) {
                 this.menuController.setReplay();
                 menuChoice = 1;
@@ -144,16 +146,41 @@ public class Game {
                     break;
 
                 case 1: //Game play
+                    firstMenuImage.deleteObject();
                     this.drawBackground();
                     menuController.deleteObject();
                     start();
                     win = false;
                     eraseGame();
+
+                    if (gameOver) {
+                        menuChoice = 2;
+                    } else {
+                        menuChoice = 3;
+                    }
                     break;
 
+                case 2:
+                    gameOverImage.drawObject();
+                    UtilityMethods.pause(5000);
+                    menuChoice = 0;
+                    gameOverImage.deleteObject();
+                    gameOver = false;
+                    win = false;
+                    break;
+
+                case 3:
+                   gameWinImage.drawObject();
+                   UtilityMethods.pause(5000);
+                   menuChoice = 0;
+                   gameWinImage.deleteObject();
+                   gameOver = false;
+                   win = false;
+                   break;
             }
         }
     }
+
 
 
     public void start() {
@@ -164,8 +191,12 @@ public class Game {
 
         while (!win) {
 
+            if (player.getPosY() > (GAME_HEIGHT - ObjectType.PLAYER.getHeigth())) {
+                win = true;
+                gameOver = true;
+            }
+
             if (player.getPosX() >= blocks[42].getPosition().getPosX()) {
-                winAnimation();
                 win = true;
             }
 
@@ -187,7 +218,6 @@ public class Game {
     }
 
 
-
     public void checkEnemyColls (GameObjects enemy, GameObjects player){
         enemyMusic = new Music();
         boolean collRight = false;
@@ -199,6 +229,7 @@ public class Game {
         if (bounds.checkCollisionOnRight(enemy, player)) {
             enemyMusic.startMusic("/resourses/music/XXX.wav");
             win = true;
+            gameOver = true;
             UtilityMethods.pause(700);
 
 
@@ -209,6 +240,7 @@ public class Game {
         if (bounds.checkCollisionOnLeft(enemy, player)) {
             enemyMusic.startMusic("/resourses/music/XXX.wav");
             win = true;
+            gameOver = true;
             UtilityMethods.pause(700);
             enemyMusic.stopMusic();
 
@@ -216,11 +248,13 @@ public class Game {
 
         if (bounds.checkCollisionOnTop(enemy, player)) {
             win = true;
+            gameOver = true;
 
         }
 
         if (bounds.checkCollisionOnBottom(enemy, player)) {
             win = true;
+            gameOver = true;
 
         }
         enemy.setCollisionOnRight(collRight);

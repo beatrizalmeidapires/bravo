@@ -319,7 +319,7 @@ public class Player extends GameObjects {
             case KeyboardEvent.KEY_DOWN:
                 moveDown();
                 break;
-            case KeyboardEvent.KEY_UP:
+            case KeyboardEvent.KEY_SPACE:
 
                 if (isCollisionOnBottom()) {
                     setJumping(true);
@@ -333,7 +333,7 @@ public class Player extends GameObjects {
                 setJumping(true);
                 break;
 
-            case KeyboardEvent.KEY_SPACE:
+            case KeyboardEvent.KEY_UP:
                 break;
 
             case KeyboardEvent.KEY_R:
