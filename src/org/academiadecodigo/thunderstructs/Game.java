@@ -48,7 +48,7 @@ public class Game {
 
     public void drawBackground() {
 
-        this.backgroundPicture = new Picture(MARGIN,MARGIN, "graphics/background.png");
+        this.backgroundPicture = new Picture(MARGIN,MARGIN, "resources/graphics/background.png");
         backgroundPicture.draw();
     }
 
@@ -82,7 +82,7 @@ public class Game {
 
     public void init() {
         playerPosition = new Position(50, 0);
-        player = new Player(playerPosition, "picture.png", this);
+        player = new Player(playerPosition, "resources/picture.png", this);
 
         blocks = gameBlocks.getRegularBlocks();
         enemies = gameBlocks.getEnemies();
@@ -102,14 +102,14 @@ public class Game {
     public void startMenu () {
 
         Position gameMenuPosition = new Position(0,0);
-        this.menuController = new GameMenu(gameMenuPosition, "graphics/background.png", 0,0);
+        this.menuController = new GameMenu(gameMenuPosition, "resources/graphics/background.png", 0,0);
         menuController.drawObject();
 
         Position menuPosition = new Position((GAME_WIDTH/2) - (ObjectType.MENU.getWidth()/2),(GAME_HEIGHT/2) - (ObjectType.MENU.getHeigth()/2));
-        this.firstMenuImage = new GameMenu(menuPosition, "graphics/corn_foot_2.jpg",menuPosition.getPosX(),menuPosition.getPosY());
-        this.secondMenuImage = new GameMenu(menuPosition, "graphics/corn_foot_1.png", menuPosition.getPosX(), menuPosition.getPosY());
-        this.gameOverImage = new GameMenu(menuPosition, "graphics/game_over.jpg", menuPosition.getPosX(), menuPosition.getPosY());
-        this.gameWinImage = new GameMenu(menuPosition, "graphics/win.jpg", menuPosition.getPosX(), menuPosition.getPosY());
+        this.firstMenuImage = new GameMenu(menuPosition, "resources/graphics/corn_foot_2.jpg",menuPosition.getPosX(),menuPosition.getPosY());
+        this.secondMenuImage = new GameMenu(menuPosition, "resources/graphics/corn_foot_1.png", menuPosition.getPosX(), menuPosition.getPosY());
+        this.gameOverImage = new GameMenu(menuPosition, "resources/graphics/game_over.jpg", menuPosition.getPosX(), menuPosition.getPosY());
+        this.gameWinImage = new GameMenu(menuPosition, "resources/graphics/win.jpg", menuPosition.getPosX(), menuPosition.getPosY());
 
         int imageFlashCounter = 0;
         boolean imageFlashCondition = false;
@@ -227,7 +227,7 @@ public class Game {
 
 
         if (bounds.checkCollisionOnRight(enemy, player)) {
-            enemyMusic.startMusic("/resourses/music/XXX.wav");
+            enemyMusic.startMusic("/resources/music/XXX.wav");
             win = true;
             gameOver = true;
             UtilityMethods.pause(700);
@@ -238,7 +238,7 @@ public class Game {
         }
 
         if (bounds.checkCollisionOnLeft(enemy, player)) {
-            enemyMusic.startMusic("/resourses/music/XXX.wav");
+            enemyMusic.startMusic("/resources/music/XXX.wav");
             win = true;
             gameOver = true;
             UtilityMethods.pause(700);
