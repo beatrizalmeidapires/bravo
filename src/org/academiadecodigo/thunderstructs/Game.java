@@ -69,7 +69,7 @@ public class Game {
     }
 
     public void init() {
-        playerPosition = new Position(100, GAME_HEIGHT - ObjectType.PLAYER.getHeigth());
+        playerPosition = new Position(50, 0);
         player = new Player(playerPosition, "picture.png", this);
 
         blocks = gameBlocks.getRegularBlocks();
@@ -134,7 +134,7 @@ public class Game {
 
         while (!win) {
 
-            if (player.getPosX() >= targetPosition.getPosX()) {
+            if (player.getPosX() >= blocks[42].getPosition().getPosX()) {
                 winAnimation();
                 win = true;
             }
