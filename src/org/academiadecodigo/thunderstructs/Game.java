@@ -97,18 +97,17 @@ public class Game {
     public void startMenu () {
 
         Position gameMenuPosition = new Position(0,0);
-        this.menuController = new GameMenu(gameMenuPosition, "graphics/background.png");
+        this.menuController = new GameMenu(gameMenuPosition, "graphics/background.png", 0,0);
         menuController.drawObject();
 
         Position firstMenuPosition = new Position((GAME_WIDTH/2) - (ObjectType.MENU.getWidth()/2),(GAME_HEIGHT/2) - (ObjectType.MENU.getHeigth()/2));
-        this.firstMenuImage = new GameMenu(firstMenuPosition, "beautiful.png");//Cornfoot1 in the middle
+        this.firstMenuImage = new GameMenu(firstMenuPosition, "graphics/corn_foot_2.jpg",firstMenuPosition.getPosX(),firstMenuPosition.getPosY());
 
         Position secondMenuPosition = new Position((GAME_WIDTH/2) - (ObjectType.MENU.getWidth()/2),(GAME_HEIGHT/2) - (ObjectType.MENU.getHeigth()/2));
-        this.secondMenuImage = new GameMenu(secondMenuPosition, "background.png");
+        this.secondMenuImage = new GameMenu(secondMenuPosition, "graphics/corn_foot_1.png", firstMenuPosition.getPosX(), firstMenuPosition.getPosY());
 
         int imageFlashCounter = 0;
         boolean imageFlashCondition = false;
-
 
 
         UtilityMethods.startKeyboard(menuController);
@@ -120,14 +119,17 @@ public class Game {
 
             imageFlashCounter++;
 
-            if (imageFlashCounter > 3388999) { //Define Utility Constant
+            if (imageFlashCounter > 1888999) { //Define Utility Constant
                 secondMenuImage.drawObject();
                 imageFlashCounter = 0;
                 imageFlashCondition = true;
             }
 
-            //if (imageFlashCondition) {
-
+            if (imageFlashCounter > 1888998 && imageFlashCondition) {
+                imageFlashCounter = 0;
+                secondMenuImage.deleteObject();
+                imageFlashCondition = false;
+            }
 
             int menuChoice = 0;
 
