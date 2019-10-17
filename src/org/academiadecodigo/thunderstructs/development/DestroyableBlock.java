@@ -1,6 +1,9 @@
-package org.academiadecodigo.thunderstructs.gameobjects;
+package org.academiadecodigo.thunderstructs.development;
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.thunderstructs.gameobjects.Block;
+import org.academiadecodigo.thunderstructs.gameobjects.ObjectType;
+import org.academiadecodigo.thunderstructs.gameobjects.Position;
 
 public class DestroyableBlock extends Block {
 

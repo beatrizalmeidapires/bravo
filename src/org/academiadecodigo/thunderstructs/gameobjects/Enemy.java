@@ -4,37 +4,30 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Enemy extends GameObjects {
 
-    private Position position;
-    private Picture enemyImage;
-    private boolean isDead;
 
-    public Enemy(Position position, String picture) {
+    private boolean movingLeft = false;
 
-        super(position, new Picture(position.getPosX(), position.getPosY(), picture), ObjectType.ENEMY);
-        this.position = position;
-        this.enemyImage = getObjectImage();
 
+    public Enemy(Position position, String picturePath) {
+
+        super(position, new Picture(position.getPosX(), position.getPosY(), picturePath), ObjectType.ENEMY);
     }
 
     //last movement indicates the last movement through a boolean: true = left; false = right
-    private boolean lastMovment = false;
     public void move() {
 
-        if (!lastMovment) {
+        if (!movingLeft) {
             if (isCollisionOnBottomRight()) {
                 moveRight();
                 return;
             }
-            lastMovment = true;
+            movingLeft = true;
         }
 
             if (isCollisionOnBottomLeft()) {
                 moveLeft();
                 return;
             }
-            lastMovment = false;
-
+            movingLeft = false;
         }
-
-
 }

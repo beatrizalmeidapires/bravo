@@ -4,10 +4,6 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.thunderstructs.gameobjects.GameObjects;
-import org.academiadecodigo.thunderstructs.gameobjects.Player;
-
-import java.awt.*;
-import java.security.Key;
 
 public final class UtilityMethods {
 
@@ -20,21 +16,9 @@ public final class UtilityMethods {
         }
     }
 
+    public static void startKeyboard(GameObjects gameObject) {
 
-    public static void startMenuKeyboard(GameObjects gameMenu) {
-
-        Keyboard menuKeyboard = new Keyboard(gameMenu);
-
-        KeyboardEvent replay = new KeyboardEvent();
-
-        replay.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        replay.setKey(KeyboardEvent.KEY_R);
-
-    }
-
-    public static void startKeyboard(GameObjects player) {
-
-        Keyboard keyboard = new Keyboard(player);
+        Keyboard keyboard = new Keyboard(gameObject);
 
         KeyboardEvent left = new KeyboardEvent();
         KeyboardEvent leftReleased = new KeyboardEvent();
@@ -49,11 +33,15 @@ public final class UtilityMethods {
         KeyboardEvent replay = new KeyboardEvent();
         KeyboardEvent quit = new KeyboardEvent();
 
+
+        //Menu keys
         replay.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         replay.setKey(KeyboardEvent.KEY_R);
         quit.setKeyboardEventType((KeyboardEventType.KEY_PRESSED));
         quit.setKey(KeyboardEvent.KEY_Q);
 
+
+        //Player keys
         left.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         left.setKey(KeyboardEvent.KEY_LEFT);
         leftReleased.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
@@ -73,6 +61,8 @@ public final class UtilityMethods {
         jump.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         jump.setKey(KeyboardEvent.KEY_SPACE);
 
+
+        //Keyboard listeners
         keyboard.addEventListener(replay);
         keyboard.addEventListener(quit);
 
@@ -82,11 +72,8 @@ public final class UtilityMethods {
         keyboard.addEventListener(right);
         keyboard.addEventListener(rightReleased);
 
-
         keyboard.addEventListener(up);
         keyboard.addEventListener(down);
         keyboard.addEventListener(jump);
     }
-
-
 }

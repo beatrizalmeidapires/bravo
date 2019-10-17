@@ -6,12 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-
-// Change this class to your liking, this is just a base example
-
+//Music handler
 public class Music {
 
-    Clip clip;
+    private Clip clip;
 
     public void startMusic(String musicPath) {
         String pathStr = musicPath;
@@ -45,5 +43,4 @@ public class Music {
     public void stopMusic(){
         clip.stop();
     }
-
 }

@@ -9,17 +9,12 @@ import org.academiadecodigo.thunderstructs.gameobjects.Position;
 
 public class GameMenu extends GameObjects implements KeyboardHandler {
 
-    private Position position;
-    private String pictureName;
-
     private boolean replay;
     private boolean quit;
 
    public GameMenu(Position position, String pictureName, int x, int y) {
 
        super(position, new Picture(x,y,pictureName), ObjectType.MENU);
-       this.position = position;
-       this.pictureName = pictureName;
    }
 
    public boolean getReplay () {
@@ -40,13 +35,14 @@ public class GameMenu extends GameObjects implements KeyboardHandler {
             case KeyboardEvent.KEY_R:
                 this.replay = true;
                 break;
+
+            case KeyboardEvent.KEY_Q:
+                this.quit = true;
+                break;
         }
     }
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
-
     }
-
-
 }
