@@ -87,6 +87,8 @@ public class GameObjects implements KeyboardHandler {
 
         if (!isCollisionOnBottom()) {
 
+            //DRAW
+
             if (gravityCounter == 6) {
                 currentGravitySpeed++;
             }

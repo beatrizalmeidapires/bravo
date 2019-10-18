@@ -27,6 +27,8 @@ public class Player extends GameObjects {
     private int leftMovementCounter;
     private int leftStoppingCounter;
 
+    private int spriteCounter;
+
 
     public Player(Position position, String picturePath, Game game) {
 
@@ -37,8 +39,10 @@ public class Player extends GameObjects {
         this.currentJumpSpeed = 3;
         this.currentRightSpeed = 1;
         this.rightMovementCounter = 0;
+        this.spriteCounter = 0;
         this.game = game;
     }
+
 
     public void moveWorldObjects (int x, int x2) {
 
@@ -53,8 +57,109 @@ public class Player extends GameObjects {
         }
     }
 
+    public void updateLeftImage () {
+
+        if (spriteCounter == 10) {
+            super.getObjectImage().load("resources/graphics/left_sprite/run_left1.png");
+        }
+        if (spriteCounter == 20) {
+            super.getObjectImage().load("resources/graphics/left_sprite/run_left2.png");
+        }
+        if (spriteCounter == 30) {
+            super.getObjectImage().load("resources/graphics/left_sprite/run_left3.png");
+        }
+        if (spriteCounter == 40) {
+            super.getObjectImage().load("resources/graphics/left_sprite/run_left4.png");
+        }
+        if (spriteCounter == 50) {
+            super.getObjectImage().load("resources/graphics/left_sprite/run_left5.png");
+        }
+        if (spriteCounter == 60) {
+            super.getObjectImage().load("resources/graphics/left_sprite/run_left6.png");
+        }
+        if (spriteCounter == 70) {
+            super.getObjectImage().load("resources/graphics/left_sprite/run_left7.png");
+        }
+        if (spriteCounter == 80) {
+            super.getObjectImage().load("resources/graphics/left_sprite/run_left8.png");
+        }
+        if (spriteCounter == 90) {
+            super.getObjectImage().load("resources/graphics/left_sprite/run_left9.png");
+        }
+        if (spriteCounter == 100) {
+            super.getObjectImage().load("resources/graphics/left_sprite/run_left10.png");
+        }
+        if (spriteCounter == 110) {
+            super.getObjectImage().load("resources/graphics/left_sprite/run_left11.png");
+        }
+        if (spriteCounter == 120) {
+            super.getObjectImage().load("resources/graphics/left_sprite/run_left12.png");
+        }
+        if (spriteCounter == 130) {
+            super.getObjectImage().load("resources/graphics/left_sprite/run_left14.png");
+        }
+        if (spriteCounter == 140) {
+            super.getObjectImage().load("resources/graphics/left_sprite/run_left15.png");
+            spriteCounter = 0;
+        }
+        spriteCounter +=2;
+    }
+
+    public void updateRightImage () {
+
+        if (spriteCounter == 10) {
+            super.getObjectImage().load("resources/graphics/right_sprite/Run1.png");
+        }
+        if (spriteCounter == 20) {
+            super.getObjectImage().load("resources/graphics/right_sprite/Run2.png");
+        }
+        if (spriteCounter == 30) {
+            super.getObjectImage().load("resources/graphics/right_sprite/Run3.png");
+        }
+        if (spriteCounter == 40) {
+            super.getObjectImage().load("resources/graphics/right_sprite/Run4.png");
+        }
+        if (spriteCounter == 50) {
+            super.getObjectImage().load("resources/graphics/right_sprite/Run5.png");
+        }
+        if (spriteCounter == 60) {
+            super.getObjectImage().load("resources/graphics/right_sprite/Run6.png");
+        }
+        if (spriteCounter == 70) {
+            super.getObjectImage().load("resources/graphics/right_sprite/Run7.png");
+        }
+        if (spriteCounter == 80) {
+            super.getObjectImage().load("resources/graphics/right_sprite/Run8.png");
+        }
+        if (spriteCounter == 90) {
+            super.getObjectImage().load("resources/graphics/right_sprite/Run9.png");
+        }
+        if (spriteCounter == 100) {
+            super.getObjectImage().load("resources/graphics/right_sprite/Run10.png");
+        }
+        if (spriteCounter == 110) {
+            super.getObjectImage().load("resources/graphics/right_sprite/Run11.png");
+        }
+        if (spriteCounter == 120) {
+            super.getObjectImage().load("resources/graphics/right_sprite/Run12.png");
+        }
+        if (spriteCounter == 130) {
+            super.getObjectImage().load("resources/graphics/right_sprite/Run14.png");
+        }
+        if (spriteCounter == 140) {
+            super.getObjectImage().load("resources/graphics/right_sprite/Run15.png");
+            System.out.println("teste");
+            spriteCounter = 0;
+        }
+        spriteCounter +=2;
+    }
+
+
+
     @Override
     public void moveRight () {
+
+        updateRightImage();
 
         rightStoppingCounter = 0;
 
@@ -82,6 +187,7 @@ public class Player extends GameObjects {
 
         moveWorldObjects(-currentRightSpeed, currentRightSpeed);
 
+        System.out.println(spriteCounter);
         rightMovementCounter++;
     }
 
@@ -121,6 +227,8 @@ public class Player extends GameObjects {
 
     @Override
     public void moveLeft () {
+
+        updateLeftImage();
 
         if (position.getPosX() < 100) {
             return;

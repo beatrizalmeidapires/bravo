@@ -77,6 +77,10 @@ public class Game {
         playerPosition = new Position(50, 0);
         player = new Player(playerPosition, "resources/graphics/hero_run.png", this);
 
+        Picture playerFalling = new Picture(player.getPosX(),player.getPosY(),"resources/graphics/hero_falling.png");
+
+        //player.getObjectImage().
+
         gameBlocks = new GameMap();
         blocks = gameBlocks.getRegularBlocks();
         enemies = gameBlocks.getEnemies();
