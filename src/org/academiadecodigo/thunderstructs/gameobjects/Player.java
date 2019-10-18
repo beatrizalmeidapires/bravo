@@ -30,7 +30,7 @@ public class Player extends GameObjects {
 
     public Player(Position position, String picturePath, Game game) {
 
-        super(position, new Picture(position.getPosX() - 5, position.getPosY(), picturePath), ObjectType.PLAYER);
+        super(position, new Picture((position.getPosX() + 10), position.getPosY(), picturePath), ObjectType.PLAYER);
         this.characterImage = getObjectImage();
         this.position = position;
         this.maxSpeed = 3;

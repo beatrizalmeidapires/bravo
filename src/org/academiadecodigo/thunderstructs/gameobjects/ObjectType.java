@@ -1,7 +1,7 @@
 package org.academiadecodigo.thunderstructs.gameobjects;
 
 public enum ObjectType {
-    PLAYER(40, 80),
+    PLAYER(50, 80),
     ENEMY(50, 50),
     REGULAR_BLOCK(80, 50),
 

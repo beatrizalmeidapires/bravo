@@ -13,8 +13,8 @@ public class GameMap {
 
     public GameMap(){
 
-        blockPositions = new Position[44];
-        blocks = new RegularBlock[44];
+        blockPositions = new Position[47];
+        blocks = new RegularBlock[47];
 
         enemyPositions = new Position[5];
         enemies = new Enemy[5];
@@ -59,10 +59,13 @@ public class GameMap {
         blockPositions[37] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 37), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 12));
         blockPositions[38] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 38), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 12));
         blockPositions[39] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 40), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 9));
-        blockPositions[40] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 42), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
-        blockPositions[41] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 43), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
-        blockPositions[42] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 44), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
-        blockPositions[43] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 45), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
+        blockPositions[40] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 41), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
+        blockPositions[41] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 42), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
+        blockPositions[42] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 43), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 10 + 15));
+        blockPositions[43] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 43), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
+        blockPositions[44] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 44), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
+        blockPositions[45] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 45), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
+        blockPositions[46] = new Position((ObjectType.REGULAR_BLOCK.getWidth() * 46), Game.GAME_HEIGHT - (ObjectType.REGULAR_BLOCK.getHeigth() * 6));
 
         blocks[0] = new RegularBlock(blockPositions[0], "resources/graphics/green_block.png");
         blocks[1] = new RegularBlock(blockPositions[1], "resources/graphics/green_block.png");
@@ -104,10 +107,13 @@ public class GameMap {
         blocks[37] = new RegularBlock(blockPositions[37], "resources/graphics/long_block_center.png");
         blocks[38] = new RegularBlock(blockPositions[38], "resources/graphics/long_block_right.png");
         blocks[39] = new RegularBlock(blockPositions[39], "resources/graphics/green_block.png");
-        blocks[40] = new RegularBlock(blockPositions[40], "resources/graphics/blue_block.png");
-        blocks[41] = new RegularBlock(blockPositions[41], "resources/graphics/blue_block.png");
-        blocks[42] = new RegularBlock(blockPositions[42], "resources/graphics/blue_block.png");
+        blocks[40] = new RegularBlock(blockPositions[40], "resources/graphics/green_block.png");
+        blocks[41] = new RegularBlock(blockPositions[41], "resources/graphics/green_block.png");
+        blocks[42] = new RegularBlock(blockPositions[42], "resources/graphics/CodeAcademy.png");
         blocks[43] = new RegularBlock(blockPositions[43], "resources/graphics/green_block.png");
+        blocks[44] = new RegularBlock(blockPositions[44], "resources/graphics/green_block.png");
+        blocks[45] = new RegularBlock(blockPositions[45], "resources/graphics/green_block.png");
+        blocks[46] = new RegularBlock(blockPositions[46], "resources/graphics/green_block.png");
 
         enemyPositions[0] = new Position((ObjectType.ENEMY.getWidth() * 12), 0);
         enemyPositions[1] = new Position((ObjectType.ENEMY.getWidth() * 25), 0);

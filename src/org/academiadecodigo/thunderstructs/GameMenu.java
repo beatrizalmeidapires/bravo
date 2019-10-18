@@ -14,7 +14,7 @@ public class GameMenu extends GameObjects implements KeyboardHandler {
 
    public GameMenu(Position position, String pictureName, int x, int y) {
 
-       super(position, new Picture(x,y,pictureName), ObjectType.MENU);
+       super(position, new Picture(Game.MARGIN + x, Game.MARGIN + y,pictureName), ObjectType.MENU);
    }
 
    public boolean getReplay () {

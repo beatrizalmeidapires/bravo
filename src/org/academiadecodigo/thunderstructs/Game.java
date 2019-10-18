@@ -20,8 +20,6 @@ public class Game {
     private Position playerPosition;
     private Player player;
 
-    private Music enemyMusic;
-
     private GameMenu menuController;
     private GameMenu firstMenuImage;
     private GameMenu secondMenuImage;
@@ -77,7 +75,7 @@ public class Game {
 
     public void init() {
         playerPosition = new Position(50, 0);
-        player = new Player(playerPosition, "resources/picture.png", this);
+        player = new Player(playerPosition, "resources/graphics/hero_run.png", this);
 
         gameBlocks = new GameMap();
         blocks = gameBlocks.getRegularBlocks();
@@ -216,13 +214,10 @@ public class Game {
 
 
     public void checkEnemyColls (GameObjects enemy, GameObjects player){
-        enemyMusic = new Music();
 
         if (bounds.checkCollisionOnAllSides(enemy, player)) {
             win = true;
             gameOver = true;
-            UtilityMethods.pause(700);
-            enemyMusic.stopMusic();
         }
 
     }
