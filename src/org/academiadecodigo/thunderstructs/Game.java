@@ -1,6 +1,5 @@
 package org.academiadecodigo.thunderstructs;
 
-import org.academiadecodigo.simplegraphics.graphics.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.thunderstructs.gameobjects.*;
 
@@ -14,13 +13,14 @@ public class Game {
     public static final int GAME_HEIGHT = 850;
     public static final int MARGIN = 10;
 
-    private Music enemyMusic;
-
     private Object[] worldObjects;
     private Picture backgroundPicture;
 
+    private ObjectBoundaries bounds;
     private Position playerPosition;
     private Player player;
+
+    private Music enemyMusic;
 
     private GameMenu menuController;
     private GameMenu firstMenuImage;
@@ -28,21 +28,17 @@ public class Game {
     private GameMenu gameOverImage;
     private GameMenu gameWinImage;
 
-    private ObjectBoundaries bounds;
-
-    private Position targetPosition;
+    private int menuChoice = 0;
     private boolean win;
     private boolean gameOver;
-    private int menuChoice = 0;
 
-
-
-    GameMap gameBlocks = new GameMap();
+    GameMap gameBlocks;
     GameObjects[] blocks;
     GameObjects[] enemies;
 
+
+
     public Game() {
-        this.targetPosition = new Position(4500, 0);
         this.win = false;
     }
 
@@ -77,24 +73,19 @@ public class Game {
 
         player.getObjectImage().delete();
         this.backgroundPicture.delete();
-
     }
 
     public void init() {
         playerPosition = new Position(50, 0);
         player = new Player(playerPosition, "resources/picture.png", this);
 
+        gameBlocks = new GameMap();
         blocks = gameBlocks.getRegularBlocks();
         enemies = gameBlocks.getEnemies();
-
-        //worldObjects = new GameObjects[blocks.length + enemies.length];
-
 
         List<GameObjects> list = new ArrayList<>(Arrays.asList(enemies));
         list.addAll(Arrays.asList(blocks));
         worldObjects = list.toArray();
-
-
 
         bounds = new ObjectBoundaries();
     }
@@ -123,7 +114,13 @@ public class Game {
 
             imageFlashCounter++;
 
-            if (imageFlashCounter > 1888999) { //Define Utility Constant
+            /*
+             *
+             *   Easter EGG || a timer, the hard way!
+             *
+             */
+
+            if (imageFlashCounter > 1888999) {
                 secondMenuImage.drawObject();
                 imageFlashCounter = 0;
                 imageFlashCondition = true;
@@ -142,10 +139,10 @@ public class Game {
 
             switch (menuChoice) {
 
-                case 0: //Game menu
+                case 0:
                     break;
 
-                case 1: //Game play
+                case 1:
                     firstMenuImage.deleteObject();
                     this.drawBackground();
                     menuController.deleteObject();
@@ -162,11 +159,11 @@ public class Game {
 
                 case 2:
                     gameOverImage.drawObject();
-                    UtilityMethods.pause(5000);
+                    UtilityMethods.pause(2000);
                     menuChoice = 0;
-                    gameOverImage.deleteObject();
                     gameOver = false;
                     win = false;
+                    gameOverImage.deleteObject();
                     break;
 
                 case 3:
@@ -191,7 +188,7 @@ public class Game {
 
         while (!win) {
 
-            if (player.getPosY() > (GAME_HEIGHT - ObjectType.PLAYER.getHeigth() - 15)) {
+            if (player.getPosY() > (GAME_HEIGHT - ObjectType.PLAYER.getHeigth() - MARGIN)) {
                 win = true;
                 gameOver = true;
             }
@@ -220,48 +217,14 @@ public class Game {
 
     public void checkEnemyColls (GameObjects enemy, GameObjects player){
         enemyMusic = new Music();
-        boolean collRight = false;
-        boolean collLeft = false;
-        boolean collTop = false;
-        boolean collBottom = false;
 
-
-        if (bounds.checkCollisionOnRight(enemy, player)) {
-            enemyMusic.startMusic("/resources/music/XXX.wav");
-            win = true;
-            gameOver = true;
-            UtilityMethods.pause(700);
-
-
-            enemyMusic.stopMusic();
-
-        }
-
-        if (bounds.checkCollisionOnLeft(enemy, player)) {
-            enemyMusic.startMusic("/resources/music/XXX.wav");
+        if (bounds.checkCollisionOnAllSides(enemy, player)) {
             win = true;
             gameOver = true;
             UtilityMethods.pause(700);
             enemyMusic.stopMusic();
-
         }
 
-        if (bounds.checkCollisionOnTop(enemy, player)) {
-            win = true;
-            gameOver = true;
-
-        }
-
-        if (bounds.checkCollisionOnBottom(enemy, player)) {
-            win = true;
-            gameOver = true;
-
-        }
-        enemy.setCollisionOnRight(collRight);
-        enemy.setCollisionOnLeft(collLeft);
-        enemy.setCollisionOnTop(collTop);
-        enemy.setCollisionOnBottom(collBottom);
-        //enemyMusic.stopMusic();
     }
 
     public void checkAllColls (GameObjects movable, GameObjects[] objects) {
@@ -296,7 +259,6 @@ public class Game {
             if(bounds.checkCollisionOnBottomRight(movable, o)){
                 collBottomRight = true;
             }
-
         }
 
         movable.setCollisionOnRight(collRight);
@@ -305,30 +267,9 @@ public class Game {
         movable.setCollisionOnBottom(collBottom);
         movable.setCollisionOnBottomLeft(collBottomLeft);
         movable.setCollisionOnBottomRight(collBottomRight);
-
     }
 
     public Object[] getWorldObjects () {
         return this.worldObjects;
     }
-
-    private void winAnimation(){
-
-        Text winMessage = new Text(600, 300, "You win bro");
-        winMessage.setColor(Color.GREEN);
-        winMessage.draw();
-        UtilityMethods.pause(100);
-        winMessage.grow(50, 50);
-        UtilityMethods.pause(100);
-        winMessage.grow(50, 50);
-        UtilityMethods.pause(100);
-        winMessage.grow(50, 50);
-        UtilityMethods.pause(100);
-        winMessage.grow(50, 50);
-        UtilityMethods.pause(100);
-        winMessage.grow(50, 50);
-        UtilityMethods.pause(100);
-        winMessage.grow(50, 50);
-    }
-
 }
